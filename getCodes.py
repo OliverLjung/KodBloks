@@ -4,9 +4,10 @@ import os.path
 import time
 
 #
-def main():
+def getCodes():
     codes = getCodes()
     print(codes)
+    return codes
 
 def getCodes():
     while not os.path.exists("fil"):
@@ -18,8 +19,3 @@ def getCodes():
     for line in rawText[4:-2]:
         codes.append(line[20:])
     return codes
-
-
-
-if __name__ == "__main__":
-    main()

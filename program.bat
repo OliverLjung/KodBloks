@@ -1,7 +1,7 @@
 @ECHO OFF
 del /f fil
-del /f bild.jpg
-python getPic.py
+@REM del /f bild.jpg
+@REM python getPic.py
 :waitloop
 IF EXIST "bild.jpg" GOTO waitloopend
 timeout /t 1
@@ -14,5 +14,5 @@ timeout /t 3
 goto waitloop
 :waitloopend
 taskkill /IM java.exe
-python getCodes.py
+python game.py
 pause
