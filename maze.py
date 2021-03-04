@@ -39,7 +39,7 @@ class Maze:
 
             print("Clicked", self.position, "grid coordinates: ", self.row, self.column)
 
-        self.window_s.fill(self.black)
+        self.window_s.fill(self.black) # Setting black background
 
         # Draw the grid
         for row in range(10):
@@ -51,7 +51,7 @@ class Maze:
                                 [(self.margin + self.width) * column + self.margin,
                                 (self.margin + self.height) * row + self.margin,
                                 self.width,
-                                self.height]) 
+                                self.height]) #Drawing the cells 
         
         self.clock.tick(self.FPS)
         pygame.display.flip()
