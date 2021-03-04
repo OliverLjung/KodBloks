@@ -1,7 +1,6 @@
 import pygame
 #import random
 
-
 win_width = 515
 win_height = 515
 FPS = 60
