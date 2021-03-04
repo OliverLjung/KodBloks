@@ -17,7 +17,7 @@ width = 46
 height = 46
 margin = 5
 
-# Size ofg the grid
+# Size of the grid
 grid = []
 for row in range(10):
     grid.append([])
