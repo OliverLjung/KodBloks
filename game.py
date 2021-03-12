@@ -7,35 +7,27 @@ class Main:
 
     def __init__(self):
         self._codes = getCodes.getCodes()
-<<<<<<< Updated upstream
-        self._mygame = Game()
-        self._myWindow = Window()
-        self._mygame.start()
-        self._character = self._mygame.character
-=======
-        self._game = Game()
-        self._window = Window()
-        self._game.start()
-        self._character = self._game.character
->>>>>>> Stashed changes
-        
-        self.start()
+        if self._codes == -1:
+            # Start or Finish missing
+            print("Start or Finish missing")
+        else:
+            self._game = Game()
+            self._window = Window()
+            self._game.start()
+            self._character = self._game.character
+            
+            self.start()
 
     def start(self):
         for code in self._codes:
-<<<<<<< Updated upstream
-            self.function(code)
-            if self._mygame.run == True:
-                self._myWindow.draw(self._mygame)
-                time.sleep(0.3)
-=======
             self.function(int(code))
             self._game.update()
             if self._game.run == True:
                 self._window.draw(self._game)
                 time.sleep(0.3)
-                
->>>>>>> Stashed changes
+
+        self._window.drawScore(self._character)
+        time.sleep(2)
 
 
     def function(self, code):

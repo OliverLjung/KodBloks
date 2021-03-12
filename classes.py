@@ -15,21 +15,6 @@ class Game:
         self.getMap()
         self._character = Character(self)
 
-<<<<<<< Updated upstream
-    def updata(self, character):
-        "Checks entities status in map"
-        for subList in self._map:
-            for element in subList:
-                if character.pos == element:
-                    if element == 1:
-                        # Collision
-                        self._run = False
-                    elif element == "p":
-                        # Scores
-                        character.score += 1
-
-                    elif element == "f":
-=======
     def update(self):
         "Checks entities status in map"
         y = -1
@@ -47,14 +32,8 @@ class Game:
                         self._character.score += 1
 
                     elif self._map[y][x] == "f":
->>>>>>> Stashed changes
                         # Finish
                         self._character.score += 10
-                        print(f"Score = {self._character.score}")
-                        self.run = False
-<<<<<<< Updated upstream
-=======
-                        break
 
         self.updateMap()
 
@@ -74,7 +53,6 @@ class Game:
                 elif self._map[y][x] == "c":
                     self._map[y][x] = 0
 
->>>>>>> Stashed changes
 
     def getMap(self):
         "Gets a map for Game to played on"
@@ -132,7 +110,6 @@ class Character():
         self._game = game
         self._score = 0
         self._pos = self.getInitPos()
-        print(self._pos)
 
     def getInitPos(self):
         y = -1
@@ -162,25 +139,6 @@ class Character():
 
     def turnRight(self):
         if self._direction == "EAST":
-<<<<<<< Updated upstream
-            self._direction == "SOUTH"
-        elif self._direction == "WEST":
-            self._direction == "NORTH"
-        elif self._direction == "NORTH":
-            self._direction == "EAST"
-        elif self._direction == "SOUTH":
-            self._direction == "WEST"
-
-    def turnLeft(self):
-        if self._direction == "EAST":
-            self._direction == "NORTH"
-        elif self._direction == "WEST":
-            self._direction == "SOUTH"
-        elif self._direction == "NORTH":
-            self._direction == "WEST"
-        elif self._direction == "SOUTH":
-            self._direction == "EAST"
-=======
             self._direction = "SOUTH"
 
         elif self._direction == "WEST":
@@ -206,7 +164,6 @@ class Character():
         elif self._direction == "SOUTH":
             self._direction = "EAST"
 
->>>>>>> Stashed changes
 
     @property    
     def direction(self):
@@ -216,8 +173,6 @@ class Character():
     def score(self):
         return self._score
 
-<<<<<<< Updated upstream
-=======
     @property
     def pos(self):
         return self._pos
@@ -226,7 +181,6 @@ class Character():
     def pos(self, xy):
         self._pos = xy
 
->>>>>>> Stashed changes
     @score.setter
     def score(self, points):
         self._score = points
@@ -264,19 +218,8 @@ class Window:
 
         # Draw the grid
         currentMap = game.map
-<<<<<<< Updated upstream
-        print(game.map)
-        print(game.mapSize)
         for x in range(0, game.mapSize[0]):
             for y in range(0 ,game.mapSize[1]):
-                print(f"Current koord: ({x}, {y}) \n")
-=======
-        for sublist in game.map:
-            print(sublist)
-        print("New frame\n\n")
-        for x in range(0, game.mapSize[0]):
-            for y in range(0 ,game.mapSize[1]):
->>>>>>> Stashed changes
                 if currentMap[y][x] == 1:
                     self.cell_color = self.white
                 elif currentMap[y][x] == 0 or currentMap[y][x] == "f":
@@ -295,3 +238,6 @@ class Window:
         self.clock.tick(self.FPS)
         pygame.display.flip()
 
+
+    def drawScore(self, character):
+        print(f"Score = {character.score}")
