@@ -43,11 +43,17 @@ def getSeq(lib):
         
         elif sublib["code"] == stopCode:
             stopPos = sublib["pos"]
+            lib.remove(sublib)
+            lib.append(sublib)
 
     xDiff = (stopPos[0]- startPos[0])
     yDiff = (stopPos[1] - startPos[1])
     dirVector = (int(xDiff), int(yDiff))
     dirVectorLength = math.sqrt(dirVector[0]**2 + dirVector[1]**2)
+
+    if dirVectorLength == 0:
+        return -1
+
     dirVector = (dirVector[0]/dirVectorLength , dirVector[1]/dirVectorLength)
 
     if dirVector == (0,0):
@@ -58,7 +64,7 @@ def getSeq(lib):
     linePos = startPos
     finished = False
     while not finished:
-        codeArea = [(linePos[0]-40, linePos[1]-40) , (linePos[0]+40, linePos[1]+40)]
+        codeArea = [(linePos[0]-100, linePos[1]-100) , (linePos[0]+100, linePos[1]+100)]
         for sublib in lib:
             code = sublib["code"]
             pos = sublib["pos"]
@@ -69,10 +75,13 @@ def getSeq(lib):
                 codes.append(code)
                 lib.remove(sublib)
         linePos = ((linePos[0]+n*dirVector[0]), (linePos[1]+n*dirVector[1]))
-        if (linePos[0] > stopPos[0]) or (linePos[1] > stopPos[1]):
+        if (linePos[0] > stopPos[0]) and (linePos[1] > stopPos[1]):
             finished = True
                     
     if codes == []:
         return -1
 
     return codes
+
+
+getCodes()

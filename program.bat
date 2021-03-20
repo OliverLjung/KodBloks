@@ -15,3 +15,4 @@ goto waitloop
 :waitloopend
 taskkill /IM java.exe
 python game.py
+pause
