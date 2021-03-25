@@ -33,6 +33,7 @@ class Game:
 
                     elif self._map[y][x] == "f":
                         # Finish
+                        self.run = False
                         self._character.score += 10
 
         self.updateMap()
@@ -47,9 +48,10 @@ class Game:
             for _ in subList:
                 x+=1
                 if self._character.pos == (x, y):
-                    self._map[y][x] = "c"
-                    if self._map[y][x] == "p":
-                        self._map[y][x] = 0
+                    if self._map[y][x] == "f":
+                        self._map[y][x] = "f"
+                    else:
+                        self._map[y][x] = "c"
                 elif self._map[y][x] == "c":
                     self._map[y][x] = 0
 
@@ -164,6 +166,39 @@ class Character():
         elif self._direction == "SOUTH":
             self._direction = "EAST"
 
+    def pathAhead(self):
+        x = self._pos[0]
+        y = self._pos[1]
+
+        if self._game.map[y][x] == "f":
+            return False
+
+        if self._direction == "EAST":
+            x+=1
+        elif self._direction == "WEST":
+            x-=1
+        elif self._direction == "NORTH":
+            y-=1
+        elif self._direction == "SOUTH":
+            y+=1
+        
+        if self._game.map[y][x] == 1:
+            return False
+        else:
+            return True
+        # elif self._game.map[x][y] == 0 or self._game.map[x][y] == "p" or self._game.map[x][y] == "f":
+        #     return True
+        
+    def notFinished(self):
+        x = self._pos[0]
+        y = self._pos[1]
+        
+        if self._game.map[x][y] == "f":
+            return False
+        else:
+            return True
+
+
 
     @property    
     def direction(self):
@@ -187,9 +222,9 @@ class Character():
 
 
 class Window:
-    def __init__(self):
-        self.win_width = 515
-        self.win_height = 515
+    def __init__(self, game):
+        self.win_width = 800
+        self.win_height = 600
         self.FPS = 60
 
         self.window = pygame.display.set_mode((self.win_width, self.win_height)) # Window
@@ -202,17 +237,23 @@ class Window:
         self.green = (0, 255, 0)
         self.blue = (0, 0, 255)
 
-        self.width = 46
-        self.height = 46
+        # säkerställer att alla bloken får plats
         self.margin = 5
+        self.width = self.win_width/game.mapSize[0] - self.margin
+        self.height = self.win_height/game.mapSize[1] - self.margin
+        
 
 
     def draw(self, game):
+
+        
+        # detta måste garantera att
     
         self.clock = pygame.time.Clock()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 game.run = False
+                raise SystemExit
             
         self.window.fill(self.black)
 
