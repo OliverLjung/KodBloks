@@ -188,6 +188,44 @@ class Character():
             return True
         # elif self._game.map[x][y] == 0 or self._game.map[x][y] == "p" or self._game.map[x][y] == "f":
         #     return True
+       
+    def pathRight(self):
+        x = self._pos[0]
+        y = self._pos[1]
+        if self._game.map[y][x] == "f":
+            return False
+        if self._direction == "EAST":
+            y+=1
+        elif self._direction == "WEST":
+            y-=1
+        elif self._direction == "NORTH":
+            x+=1
+        elif self._direction == "SOUTH":
+            x-=1
+
+        if self._game.map[y][x] == 1:
+            return False
+        else:
+            return True
+    
+    def pathLeft(self):
+        x = self._pos[0]
+        y = self._pos[1]
+        if self._game.map[y][x] == "f":
+            return False
+        if self._direction == "EAST":
+            y+=1
+        elif self._direction == "WEST":
+            y+-1
+        elif self._direction == "NORTH":
+            x+=1
+        elif self._direction == "SOUTH":
+            x=-1
+        
+        if self._game.map[y][x] == 1:
+            return False
+        else:
+            return True
         
     def notFinished(self):
         x = self._pos[0]
