@@ -85,7 +85,7 @@ class Main:
                         self._window.draw(self._game)
                         time.sleep(0.3)
                         main()
-           elif code == 59:
+         elif code == 59:
             # Start if-statement
             print(f"Cond: {codeList[1]}")
             if self.condition(codeList[1]):
