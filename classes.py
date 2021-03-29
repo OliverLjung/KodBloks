@@ -315,11 +315,8 @@ class Window:
                 self.windw2.blit(self.exit_text, self.exit_react)
                 pygame.display.flip()
                 if event.type == pygame.MOUSEBUTTONDOWN: #Exit knappen
-                    mx, my = pygame.mouse.get_pos()
-                    if mx >= 225 and mx <= 275:
-                        run = False
-                        raise SystemExit
-                    if my >= 600 and my <= 620:
+                    self.mx, self.my = pygame.mouse.get_pos()
+                    if self.mx >= 225 and self.mx <= 275 and self.my >= 600 and self.my <= 620:
                         run = False
                         raise SystemExit
 
@@ -354,6 +351,10 @@ class Window:
 
                 self.window.blit(self.help_text, self.help_react)
                 pygame.display.flip()
+
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    mx, my = pygame.mouse.get_pos()
+                    print(mx, my)
 
                 if currentMap[y][x] == 1:
                     self.cell_color = self.white
