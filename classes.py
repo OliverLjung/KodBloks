@@ -353,8 +353,8 @@ class Window:
                 pygame.display.flip()
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    mx, my = pygame.mouse.get_pos()
-                    print(mx, my)
+                    self.mx, self.my = pygame.mouse.get_pos()
+                    print(self.mx, self.my)
 
                 if currentMap[y][x] == 1:
                     self.cell_color = self.white
