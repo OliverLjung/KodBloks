@@ -1,11 +1,21 @@
 bild.jpg
-Found 6 codes.
-1068 candidates.
-101 tested.
-0 0000 0101 1011  = 91
-0 0000 0100 1111  = 79
-0 0000 0011 1101  = 61
-0 0000 0011 1011  = 59
-0 0000 0010 1111  = 47
-0 0000 0101 0111  = 87
-82ms elapsed time.
+Found 16 codes.
+2985 candidates.
+297 tested.
+topcode=61, pos=(1365,283)
+topcode=87, pos=(945,283)
+topcode=681, pos=(1799,284)
+topcode=79, pos=(531,285)
+topcode=59, pos=(384,286)
+topcode=47, pos=(251,288)
+topcode=59, pos=(808,287)
+topcode=55, pos=(666,288)
+topcode=93, pos=(119,289)
+topcode=55, pos=(1071,289)
+topcode=103, pos=(1209,290)
+topcode=55, pos=(1501,290)
+topcode=55, pos=(1633,290)
+topcode=109, pos=(808,354)
+topcode=121, pos=(251,362)
+topcode=117, pos=(389,364)
+218ms elapsed time.
