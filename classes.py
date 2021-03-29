@@ -285,34 +285,34 @@ class Window:
         
 
     def drawHelp(self):
-        self.win_width2 = 500
+        self.win_width2 = 470
         self.win_height2 = 600
         self.windw2 = pygame.display.set_mode((self.win_width2, self.win_height2))
         pygame.display.set_caption("Instruction window")
 
-        font = pygame.font.Font('freesansbold.ttf', 30)
-        text = font.render('Instruktioner-Instructions', True, black,)
-        text_rect = text.get_rect()
-        text_rect.center = (250, 50)
+        self.font = pygame.font.Font('freesansbold.ttf', 30)
+        self.text = font.render('Instruktioner-Instructions', True, black,)
+        self.text_rect = text.get_rect()
+        self.text_rect.center = (250, 50)
 
         #Exit rektangeln
-        exit_text = font.render('Exit', True, red,)
-        exit_react = exit_text.get_rect()
-        exit_react.center = (250, 600)
+        self.exit_text = font.render('Exit', True, red,)
+        self.exit_react = exit_text.get_rect()
+        self.exit_react.center = (250, 600)
         
         self.run = False
         while not self.run:
-            bg = pygame.image.load('bg.jpg') #Bakgrund 
-            windw2.blit(bg, (0, 0))
+            self.bg = pygame.image.load('bg.jpg') #Bakgrund 
+            self.windw2.blit(self.bg, (0, 0))
             pygame.display.flip()
 
-            windw2.blit(text, text_rect)
+            self.windw2.blit(text, text_rect)
             pygame.display.flip()
             
             for event in pygame.event.get():
-                windw2.blit(bg, (0, 0))
-                windw2.blit(text, text_rect)
-                windw2.blit(exit_text, exit_react)
+                self.windw2.blit(bg, (0, 0))
+                self.windw2.blit(text, text_rect)
+                self.windw2.blit(self.exit_text, self.exit_react)
                 pygame.display.flip()
                 if event.type == pygame.MOUSEBUTTONDOWN: #Exit knappen
                     mx, my = pygame.mouse.get_pos()
@@ -345,6 +345,16 @@ class Window:
         currentMap = game.map
         for x in range(0, game.mapSize[0]):
             for y in range(0 ,game.mapSize[1]):
+
+                #Hjälp knappen
+                font = pygame.font.Font('freesansbold.ttf', 40)
+                self.help_text = font.render('HELP', True, self.red,)
+                self.help_react = self.help_text.get_rect()
+                self.help_react = (630, 60)
+
+                self.window.blit(self.help_text, self.help_react)
+                pygame.display.flip()
+
                 if currentMap[y][x] == 1:
                     self.cell_color = self.white
                 elif currentMap[y][x] == 0 or currentMap[y][x] == "f":
