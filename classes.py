@@ -259,6 +259,11 @@ class Character():
 
 
 class Window:
+    black = (0, 0, 0)
+    white = (255, 255,255)
+    red = (255, 0, 0)
+    green = (0, 255, 0)
+    blue = (0, 0, 255)
     def __init__(self, game):
         self.win_width = 800
         self.win_height = 600
@@ -268,11 +273,7 @@ class Window:
         pygame.display.set_caption("Maze Game") # Window title
 
         #rbg
-        self.black = (0, 0, 0)
-        self.white = (255, 255,255)
-        self.red = (255, 0, 0)
-        self.green = (0, 255, 0)
-        self.blue = (0, 0, 255)
+        
 
         # säkerställer att alla bloken får plats
         self.margin = 5
@@ -291,13 +292,13 @@ class Window:
         pygame.display.set_caption("Instruction window")
 
         self.font = pygame.font.Font('freesansbold.ttf', 30)
-        self.text = font.render('Instruktioner-Instructions', True, black,)
-        self.text_rect = text.get_rect()
+        self.text = self.font.render('Instruktioner-Instructions', True, Window.black,)
+        self.text_rect = self.text.get_rect()
         self.text_rect.center = (250, 50)
 
         #Exit rektangeln
-        self.exit_text = font.render('Exit', True, red,)
-        self.exit_react = exit_text.get_rect()
+        self.exit_text = self.font.render('Exit', True, Window.red,)
+        self.exit_react = self.exit_text.get_rect()
         self.exit_react.center = (250, 600)
         
         self.run = False
@@ -306,12 +307,12 @@ class Window:
             self.windw2.blit(self.bg, (0, 0))
             pygame.display.flip()
 
-            self.windw2.blit(text, text_rect)
+            self.windw2.blit(self.text, self.text_rect)
             pygame.display.flip()
             
             for event in pygame.event.get():
-                self.windw2.blit(bg, (0, 0))
-                self.windw2.blit(text, text_rect)
+                self.windw2.blit(self.bg, (0, 0))
+                self.windw2.blit(self.text, self.text_rect)
                 self.windw2.blit(self.exit_text, self.exit_react)
                 pygame.display.flip()
                 if event.type == pygame.MOUSEBUTTONDOWN: #Exit knappen
@@ -352,9 +353,6 @@ class Window:
                 self.window.blit(self.help_text, self.help_react)
                 pygame.display.flip()
 
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    self.mx, self.my = pygame.mouse.get_pos()
-                    print(self.mx, self.my)
 
                 if currentMap[y][x] == 1:
                     self.cell_color = self.white

@@ -19,6 +19,7 @@ class Main:
         self._window = Window(self._game)
         self._character = self._game.character
         self._window.draw(self._game)
+         
 
         self.n = 0
 
@@ -158,6 +159,10 @@ def main():
         havePicture = False
         while not havePicture:
             for event in pygame.event.get():
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    x_pos, y_pos = pygame.mouse.get_pos()
+                    if x_pos >= 630 and x_pos <= 735 and y_pos >= 60 and y_pos <= 90:
+                        Window.drawHelp() #Vet inte vad jag ska kalla här?
                 if event.type == pygame.QUIT: 
                     game.game.run = False
                     raise SystemExit
