@@ -259,11 +259,7 @@ class Character():
 
 
 class Window:
-    black = (0, 0, 0)
-    white = (255, 255,255)
-    red = (255, 0, 0)
-    green = (0, 255, 0)
-    blue = (0, 0, 255)
+    
     def __init__(self, game):
         self.win_width = 800
         self.win_height = 600
@@ -273,6 +269,12 @@ class Window:
         pygame.display.set_caption("Maze Game") # Window title
 
         #rbg
+
+        self.black = (0, 0, 0)
+        self.white = (255, 255,255)
+        self.red = (255, 0, 0)
+        self.green = (0, 255, 0)
+        self.blue = (0, 0, 255)
         
 
         # säkerställer att alla bloken får plats
@@ -292,12 +294,12 @@ class Window:
         pygame.display.set_caption("Instruction window")
 
         self.font = pygame.font.Font('freesansbold.ttf', 30)
-        self.text = self.font.render('Instruktioner-Instructions', True, Window.black,)
+        self.text = self.font.render('Instruktioner-Instructions', True, self.black,)
         self.text_rect = self.text.get_rect()
         self.text_rect.center = (250, 50)
 
         #Exit rektangeln
-        self.exit_text = self.font.render('Exit', True, Window.red,)
+        self.exit_text = self.font.render('Exit', True, self.red,)
         self.exit_react = self.exit_text.get_rect()
         self.exit_react.center = (250, 600)
         
@@ -349,10 +351,16 @@ class Window:
                 self.help_text = font.render('HELP', True, self.red,)
                 self.help_react = self.help_text.get_rect()
                 self.help_react = (630, 60)
-
                 self.window.blit(self.help_text, self.help_react)
-                pygame.display.flip()
+                
 
+
+                self.run_text = font.render("RUN", True, self.green)
+                self.run_react = self.run_text.get_rect()
+                self.run_react = (630, 400)
+                self.window.blit(self.run_text, self.run_react)
+                
+                pygame.display.flip()
 
                 if currentMap[y][x] == 1:
                     self.cell_color = self.white
