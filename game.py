@@ -153,7 +153,6 @@ def main():
     run = True
     while run:
         game = Main()
-        window_game = Window(game)
         # Station logic
         ### takes picture when some event is given
         
@@ -163,7 +162,7 @@ def main():
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     x_pos, y_pos = pygame.mouse.get_pos()
                     if x_pos >= 630 and x_pos <= 735 and y_pos >= 60 and y_pos <= 90:
-                        Window.drawHelp(window_game) 
+                        Window.drawHelp() 
                 if event.type == pygame.QUIT: 
                     game.game.run = False
                     raise SystemExit

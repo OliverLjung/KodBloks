@@ -259,6 +259,12 @@ class Character():
 
 
 class Window:
+    black = (0, 0, 0)
+    white = (255, 255,255)
+    red = (255, 0, 0)
+    green = (0, 255, 0)
+    blue = (0, 0, 255)
+        
     
     def __init__(self, game):
         self.win_width = 800
@@ -270,11 +276,11 @@ class Window:
 
         #rbg
 
-        self.black = (0, 0, 0)
-        self.white = (255, 255,255)
-        self.red = (255, 0, 0)
-        self.green = (0, 255, 0)
-        self.blue = (0, 0, 255)
+        # self.black = (0, 0, 0)
+        # self.white = (255, 255,255)
+        # self.red = (255, 0, 0)
+        # self.green = (0, 255, 0)
+        # self.blue = (0, 0, 255)
         
 
         # säkerställer att alla bloken får plats
@@ -296,13 +302,24 @@ class Window:
         self.font = pygame.font.Font('freesansbold.ttf', 30)
         self.text = self.font.render('Instruktioner-Instructions', True, self.black,)
         self.text_rect = self.text.get_rect()
-        self.text_rect.center = (250, 50)
+        self.text_rect.center = (245, 45)
 
         #Exit rektangeln
         self.exit_text = self.font.render('Exit', True, self.red,)
         self.exit_react = self.exit_text.get_rect()
-        self.exit_react.center = (250, 600)
+        self.exit_react.center = (250, 610)
         
+        #text size
+        self.text_font = pygame.font.Font('freesansbold.ttf', 17)       
+        
+        self.start_text = self.text_font.render('Start block: ', True, self.black,)
+        self.start_rect = self.start_text.get_rect()
+        self.start_rect = (45, 62)
+
+        self.stop_text = self.text_font.render('Stop block: ', True, self.black,)
+        self.stop_rect = self.stop_text.get_rect()
+        self.stop_rect = (45, 106)
+
         self.run = False
         while not self.run:
             self.bg = pygame.image.load('bg.jpg') #Bakgrund 
@@ -316,6 +333,15 @@ class Window:
                 self.windw2.blit(self.bg, (0, 0))
                 self.windw2.blit(self.text, self.text_rect)
                 self.windw2.blit(self.exit_text, self.exit_react)
+                
+                self.i = 70 
+                while self.i >= 70 and self.i <= 580:
+                    pygame.draw.circle(self.windw, self.black, (37,self.i), 5) #Punkt    
+                    self.i+= 45
+
+                self.windw.blit(self.start_text, self.start_rect)
+                self.windw.blit(self.stop_text, self.stop_rect)
+
                 pygame.display.flip()
                 if event.type == pygame.MOUSEBUTTONDOWN: #Exit knappen
                     self.mx, self.my = pygame.mouse.get_pos()
