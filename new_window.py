@@ -72,10 +72,29 @@ def main():
     stop_rect = stop_text.get_rect()
     stop_rect = (45, 107)
 
+
+    #Draws initial image before changes can be applied
+    bg = pygame.image.load('bg.jpg')
+        
+    windw.blit(bg, (0, 0))
+    windw.blit(text, text_rect)
+    windw.blit(exit_text, exit_rect)
+    windw.blit(pick_lang_text, pick_lang_rect)
+    
+    i = 70 
+    while i >= 70 and i <= 580:
+        pygame.draw.circle(windw, black, (37,i), 5) #Punkt    
+        i+= 45
+    
+    windw.blit(start_text, start_rect)
+    windw.blit(stop_text, stop_rect)
+
+    change = False
     run = False
     while not run:
-        bg = pygame.image.load('bg.jpg')
-        for event in pygame.event.get():
+        if change:
+            bg = pygame.image.load('bg.jpg')
+            
             windw.blit(bg, (0, 0))
             windw.blit(text, text_rect)
             windw.blit(exit_text, exit_rect)
@@ -89,7 +108,7 @@ def main():
             windw.blit(start_text, start_rect)
             windw.blit(stop_text, stop_rect)
 
-    
+        for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
                     mx, my = pygame.mouse.get_pos()
                     print(mx, my)

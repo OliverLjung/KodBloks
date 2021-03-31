@@ -287,103 +287,7 @@ class Window:
         self.width = 55 - self.margin 
         self.height = 55 - self.margin
 
-    def sve(self):
-        self.sve_text_font = pygame.font.Font('freesansbold.ttf', 13)
-        self.sve_text = self.sve_text_font.render('Spelet startas', True, self.black,)
-        self.sve_rect = self.sve_text.get_rect()
-        self.sve_rect.center = (200, 65)
 
-        self.windw2.blit(self.sve_text, self.sve_rect)
-
-    def eng(self):
-        Ceng_text_font = pygame.font.Font('freesansbold.ttf', 14)
-        self.start_text = self.eng_text_font.render('The game is started.', True, self.red,)
-        self.start_rect = self.start_text.get_rect()
-        self.start_rect.center = (213, 73)
-        
-        self.stop_text = self.eng_text_font.render('The game is ended.', True, self.red,)
-        self.stop_rect = self.start_text.get_rect()
-        self.stop_rect.center = (210, 117)
-
-
-        self.windw2.blit(self.start_text, self.start_rect)
-        self.windw2.blit(self.stop_text, self.stop_rect)        
-
-    def drawHelp(self):
-        self.win_width2 = 470
-        self.win_height2 = 600
-        self.windw2 = pygame.display.set_mode((self.win_width2, self.win_height2))
-        pygame.display.set_caption("Instruction window")
-
-        #text size
-        self.font = pygame.font.Font('freesansbold.ttf', 25)
-        self.text_font = pygame.font.Font('freesansbold.ttf', 17)  
-        self.lang_font = pygame.font.Font('freesansbold.ttf', 17)
-        #Title
-        self.text = self.font.render('Instruktioner-Instructions', True, self.black,)
-        self.text_rect = self.text.get_rect()
-        self.text_rect.center = (230, 45)
-
-        #Exit rektangeln
-        self.exit_text = self.font.render('Exit', True, self.red,)
-        self.exit_react = self.exit_text.get_rect()
-        self.exit_react.center = (250, 610)
-
-        #Välj språk, Sve eller Eng
-        self.pick_lang_text = self.lang_font.render('Sve/Eng', True, self.red,)
-        self.pick_lang_rect = self.pick_lang_text.get_rect()
-        self.pick_lang_rect = (405, 38)
-
-        #Start block
-        self.start_text = self.text_font.render('Start block: ', True, self.black,)
-        self.start_rect = self.start_text.get_rect()
-        self.start_rect = (45, 63)
-
-        #Start block
-        self.stop_text = self.text_font.render('Stop block: ', True, self.black,)
-        self.stop_rect = self.stop_text.get_rect()
-        self.stop_rect = (45, 107)
-
-        self.run = False
-        while not self.run:
-            self.bg = pygame.image.load('bg.jpg') #Bakgrund 
-            self.windw2.blit(self.bg, (0, 0))
-            pygame.display.flip()
-
-            self.windw2.blit(self.text, self.text_rect)
-            pygame.display.flip()
-            
-            for event in pygame.event.get():
-                self.windw2.blit(self.bg, (0, 0))
-                self.windw2.blit(self.text, self.text_rect)
-                self.windw2.blit(self.exit_text, self.exit_react)
-                
-                self.i = 70 
-                while self.i >= 70 and self.i <= 580:
-                    pygame.draw.circle(self.windw2, self.black, (37,self.i), 5) #Punkt    
-                    self.i+= 45
-
-                self.windw2.blit(self.start_text, self.start_rect)
-                self.windw2.blit(self.stop_text, self.stop_rect)
-
-                pygame.display.flip()
-                if event.type == pygame.MOUSEBUTTONDOWN: 
-                    self.mx, self.my = pygame.mouse.get_pos()
-                    #Exit knappen
-                    if self.mx >= 225 and self.mx <= 275 and self.my >= 600 and self.my <= 620:
-                        run = False
-                        raise SystemExit
-                    #Sve knappen
-                    if self.mx >= 405 and self.mx <= 430 and self.my >= 38 and self.my <= 51:
-                        Window.sve()
-                    #Eng knappen
-                    if self.mx >= 440 and self.mx <= 469 and self.my >= 40  and self.my <= 55:
-                        Window.eng()
-
-
-                if event.type == pygame.QUIT: 
-                    run =  False
-                    raise SystemExit
 
     
         
@@ -440,3 +344,134 @@ class Window:
 
     def drawScore(self, character):
         print(f"Score = {character.score}")
+
+
+class HelpWindow:
+    def __init__(self):
+        pygame.init()
+        pygame.font.init()
+        self.bg = pygame.image.load('bg.jpg') #Bakgrund 
+
+        self.black = (0, 0, 0)
+        self.white = (255, 255,255)
+        self.red = (255, 0, 0)
+        self.green = (0, 255, 0)
+        self.blue = (0, 0, 255)
+
+    def sve(self):
+        self.sve_text_font = pygame.font.Font('freesansbold.ttf', 13)
+        self.sve_text = self.sve_text_font.render('Spelet startas', True, self.black,)
+        self.sve_rect = self.sve_text.get_rect()
+        self.sve_rect.center = (200, 65)
+        self.windw2.blit(self.sve_text, self.sve_rect)
+
+    def eng(self):
+        Ceng_text_font = pygame.font.Font('freesansbold.ttf', 14)
+        self.start_text = self.eng_text_font.render('The game is started.', True, self.red,)
+        self.start_rect = self.start_text.get_rect()
+        self.start_rect.center = (213, 73)
+        
+        self.stop_text = self.eng_text_font.render('The game is ended.', True, self.red,)
+        self.stop_rect = self.start_text.get_rect()
+        self.stop_rect.center = (210, 117)
+        self.windw2.blit(self.start_text, self.start_rect)
+        self.windw2.blit(self.stop_text, self.stop_rect)        
+
+    def drawHelp(self):
+        
+        self.windw2 = pygame.display.set_mode((self.bg.get_width(), self.bg.get_()))
+        pygame.display.set_caption("Instruction window")
+
+        #text size
+        self.font = pygame.font.Font('freesansbold.ttf', 25)
+        self.text_font = pygame.font.Font('freesansbold.ttf', 17)  
+        self.lang_font = pygame.font.Font('freesansbold.ttf', 17)
+        #Title
+        self.text = self.font.render('Instruktioner-Instructions', True, self.black,)
+        self.text_rect = self.text.get_rect()
+        self.text_rect.center = (230, 45)
+
+        #Exit rektangeln
+        self.exit_text = self.font.render('Exit', True, self.red,)
+        self.exit_react = self.exit_text.get_rect()
+        self.exit_react.center = (250, 610)
+
+        #Välj språk, Sve eller Eng
+        self.pick_lang_text = self.lang_font.render('Sve/Eng', True, self.red,)
+        self.pick_lang_rect = self.pick_lang_text.get_rect()
+        self.pick_lang_rect = (405, 38)
+
+        #Start block
+        self.start_text = self.text_font.render('Start block: ', True, self.black,)
+        self.start_rect = self.start_text.get_rect()
+        self.start_rect = (45, 63)
+
+        #Stop block
+        self.stop_text = self.text_font.render('Stop block: ', True, self.black,)
+        self.stop_rect = self.stop_text.get_rect()
+        self.stop_rect = (45, 107)
+
+        #Draws initial image before changes can be applied
+        self.windw2.blit(self.bg, (0, 0))
+
+        self.windw2.blit(self.text, self.text_rect)
+        
+        self.windw2.blit(self.bg, (0, 0))
+        self.windw2.blit(self.text, self.text_rect)
+        self.windw2.blit(self.exit_text, self.exit_react)
+        
+        self.i = 70 
+        pygame.draw.circle(self.windw2, self.black, (37,self.i), 5) #Punkt    
+        self.i+= 45
+
+        self.windw2.blit(self.start_text, self.start_rect)
+        self.windw2.blit(self.stop_text, self.stop_rect)
+        pygame.display.flip()
+
+        hasChanged = False
+
+
+        self.run = False
+        while not self.run:
+            if hasChanged:
+                pygame.display.flip()
+                hasChanged = False
+            
+            self.windw2.blit(self.bg, (0, 0))
+
+            self.windw2.blit(self.text, self.text_rect)
+            
+            for event in pygame.event.get():
+                self.windw2.blit(self.bg, (0, 0))
+                self.windw2.blit(self.text, self.text_rect)
+                self.windw2.blit(self.exit_text, self.exit_react)
+                
+                self.i = 70 
+                while self.i >= 70 and self.i <= 580:
+                    pygame.draw.circle(self.windw2, self.black, (37,self.i), 5) #Punkt    
+                    self.i+= 45
+
+                self.windw2.blit(self.start_text, self.start_rect)
+                self.windw2.blit(self.stop_text, self.stop_rect)
+
+                
+                if event.type == pygame.MOUSEBUTTONDOWN: 
+                    self.mx, self.my = pygame.mouse.get_pos()
+                    #Exit knappen
+                    if self.mx >= 225 and self.mx <= 275 and self.my >= 600 and self.my <= 620:
+                        run = False
+                        raise SystemExit
+                    #Sve knappen
+                    if self.mx >= 405 and self.mx <= 430 and self.my >= 38 and self.my <= 51:
+                        HelpWindow.sve()
+                    #Eng knappen
+                    if self.mx >= 440 and self.mx <= 469 and self.my >= 40  and self.my <= 55:
+                        HelpWindow.eng()
+
+
+                if event.type == pygame.QUIT: 
+                    run =  False
+                    raise SystemExit
+
+mywindow = HelpWindow()
+mywindow.drawHelp()

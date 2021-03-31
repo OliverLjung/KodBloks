@@ -1,4 +1,4 @@
-from classes import Game, Window
+from classes import Game, Window, HelpWindow
 import getCodes 
 import pygame
 import time
@@ -154,9 +154,8 @@ class Main:
         return self._window
 
 def main():
-    
-
     run = True
+    help_window = HelpWindow()
     while run:
         game = Main()
         # Station logic
@@ -168,8 +167,9 @@ def main():
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     x_pos, y_pos = pygame.mouse.get_pos()
                     if x_pos >= 630 and x_pos <= 735 and y_pos >= 60 and y_pos <= 90:
-                        game.window.drawHelp() 
-                if event.type == pygame.QUIT: 
+                        help_window.drawHelp() 
+
+                elif event.type == pygame.QUIT: 
                     game.game.run = False
                     raise SystemExit
                 elif event.type == KEYDOWN or event.type == KEYUP:
