@@ -149,7 +149,13 @@ class Main:
     def game(self):
         return self._game
 
+    @property
+    def window(self):
+        return self._window
+
 def main():
+    
+
     run = True
     while run:
         game = Main()
@@ -162,7 +168,7 @@ def main():
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     x_pos, y_pos = pygame.mouse.get_pos()
                     if x_pos >= 630 and x_pos <= 735 and y_pos >= 60 and y_pos <= 90:
-                        Window.drawHelp() 
+                        game.window.drawHelp() 
                 if event.type == pygame.QUIT: 
                     game.game.run = False
                     raise SystemExit

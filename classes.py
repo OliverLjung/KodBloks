@@ -259,11 +259,6 @@ class Character():
 
 
 class Window:
-    black = (0, 0, 0)
-    white = (255, 255,255)
-    red = (255, 0, 0)
-    green = (0, 255, 0)
-    blue = (0, 0, 255)
         
     
     def __init__(self, game):
@@ -276,11 +271,11 @@ class Window:
 
         #rbg
 
-        # self.black = (0, 0, 0)
-        # self.white = (255, 255,255)
-        # self.red = (255, 0, 0)
-        # self.green = (0, 255, 0)
-        # self.blue = (0, 0, 255)
+        self.black = (0, 0, 0)
+        self.white = (255, 255,255)
+        self.red = (255, 0, 0)
+        self.green = (0, 255, 0)
+        self.blue = (0, 0, 255)
         
 
         # säkerställer att alla bloken får plats
@@ -291,6 +286,11 @@ class Window:
         # Så help och run knappen får plats
         self.width = 55 - self.margin 
         self.height = 55 - self.margin
+
+    # def swe_text(self):
+    #     self. 
+
+    # # def eng_text(self):
         
 
     def drawHelp(self):
@@ -302,7 +302,7 @@ class Window:
         self.font = pygame.font.Font('freesansbold.ttf', 30)
         self.text = self.font.render('Instruktioner-Instructions', True, self.black,)
         self.text_rect = self.text.get_rect()
-        self.text_rect.center = (245, 45)
+        self.text_rect.center = (240, 45)
 
         #Exit rektangeln
         self.exit_text = self.font.render('Exit', True, self.red,)
@@ -336,11 +336,11 @@ class Window:
                 
                 self.i = 70 
                 while self.i >= 70 and self.i <= 580:
-                    pygame.draw.circle(self.windw, self.black, (37,self.i), 5) #Punkt    
+                    pygame.draw.circle(self.windw2, self.black, (37,self.i), 5) #Punkt    
                     self.i+= 45
 
-                self.windw.blit(self.start_text, self.start_rect)
-                self.windw.blit(self.stop_text, self.stop_rect)
+                self.windw2.blit(self.start_text, self.start_rect)
+                self.windw2.blit(self.stop_text, self.stop_rect)
 
                 pygame.display.flip()
                 if event.type == pygame.MOUSEBUTTONDOWN: #Exit knappen
@@ -379,8 +379,7 @@ class Window:
                 self.help_react = (630, 60)
                 self.window.blit(self.help_text, self.help_react)
                 
-
-
+                #Run knappen
                 self.run_text = font.render("RUN", True, self.green)
                 self.run_react = self.run_text.get_rect()
                 self.run_react = (630, 400)

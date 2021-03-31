@@ -1,6 +1,8 @@
 import pygame
 import os
 
+def 
+
 def main():
 
     pygame.init()
@@ -8,6 +10,7 @@ def main():
     win_width = 500
     win_height = 650
     windw = pygame.display.set_mode((win_width, win_height))
+    # windw = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
     pygame.display.set_caption("Instruction window")
 
     white = (255, 255,255)
@@ -18,7 +21,7 @@ def main():
     font = pygame.font.Font('freesansbold.ttf', 25)
     text = font.render('Instruktioner-Instructions', True, black,)
     text_rect = text.get_rect()
-    text_rect.center = (245, 45)
+    text_rect.center = (240, 45)
 
     exit_text = font.render('Exit', True, red,)
     exit_rect = exit_text.get_rect()
