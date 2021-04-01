@@ -8,11 +8,7 @@ import cv2
 from pygame.locals import *
 
 
-
-
 class Main:
-
-    ifHasFailed = False
 
     def __init__(self):
         self._game = Game()
@@ -21,16 +17,14 @@ class Main:
         self._window.draw(self._game)
 
         self.n = 0
+        self.ifHasFailed = False
 
     def start(self):
         self._codes = getCodes.getCodes()
-        print(self._codes)
         if self._codes == -1: 
-            print("Start or stop code is missing")
             return
 
         elif self._codes == -2:
-            print("Condition code is missing")
             return
 
         for codeList in self._codes:
@@ -38,13 +32,10 @@ class Main:
             self._game.update()
             if self._game.run == True:
                 self._window.draw(self._game)
-                time.sleep(0.3)
             else:
                 self._window.draw(self._game)
                 break
 
-        self._window.drawScore(self._character)
-        time.sleep(2)
         main()
 
     def function(self, codeList):
@@ -64,17 +55,17 @@ class Main:
         if code == 87:
             # Move forward
             self._character.moveForward()
-            ifHasFailed = False
+            self.ifHasFailed = False
 
         elif code == 79:
             # Turn right
             self._character.turnRight()
-            ifHasFailed = False
+            self.ifHasFailed = False
 
         elif code == 61:
             # Turn left
             self._character.turnLeft()
-            ifHasFailed = False
+            self.ifHasFailed = False
 
         elif code == 47:
             # Start whileloop
@@ -84,55 +75,47 @@ class Main:
                     self._game.update()
                     if self._game.run == True:
                         self._window.draw(self._game)
-                        time.sleep(0.3)
                         self.function(codeSubList)
                     else:
                         self._window.draw(self._game)
-                        time.sleep(0.3)
                         main()
-            ifHasFailed = False
+            self.ifHasFailed = False
 
         elif code == 59:
             # Start if-statement
             print(f"Cond: {codeList[1]}")
             if self.condition(codeList[1]):
-                ifHasFailed = False
+                self.ifHasFailed = False
                 for codeSubList in codeList[2]:
                     self._game.update()
                     if self._game.run == True:
                         self._window.draw(self._game)
-                        time.sleep(0.3)
                         self.function(codeSubList)
                     else:
                         self._window.draw(self._game)
-                        time.sleep(0.3)
                         main()
             else:
-                ifHasFailed = True
+                self.ifHasFailed = True
 
         elif code == 103:
             # Start else-statement
-            if ifHasFailed:
-                for codeSubList in codeList[2]:
+            if self.ifHasFailed:
+                for codeSubList in codeList[1]:
                     self._game.update()
                     if self._game.run == True:
                         self._window.draw(self._game)
-                        time.sleep(0.3)
                         self.function(codeSubList)
                     else:
                         self._window.draw(self._game)
-                        time.sleep(0.3)
                         main()
-            ifHasFailed = False
+            self.ifHasFailed = False
         
         
         self._game.update()
         if self._game.run == True:
             self._window.draw(self._game)
-            time.sleep(0.3)
         else:
             self._window.draw(self._game)
-            time.sleep(0.3)
             main()
 
 
@@ -141,6 +124,10 @@ class Main:
             cond = self._character.pathAhead()
         elif code == 121:
             cond = self._character.notFinished()
+        elif code == 117:
+            cond = self._character.pathRight()
+        elif code == 121:
+            cond = self._character.pathLeft()
         print(cond)
         return cond
 
@@ -148,21 +135,42 @@ class Main:
     def game(self):
         return self._game
 
+    @property
+    def character(self):
+        return self._character
+
+    @property
+    def window(self):
+        return self._window
+    
+
 def main():
+    global game
+    if type(game) is Main:
+        game.window.drawScore(game.character)
     run = True
     while run:
+        pygame.init()
         game = Main()
         # Station logic
         ### takes picture when some event is given
-        
+        game.window.draw(game.game)
         havePicture = False
         while not havePicture:
+            pygame.display.update() 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT: 
                     game.game.run = False
                     raise SystemExit
                 elif event.type == KEYDOWN or event.type == KEYUP:
-                    if event.key == K_SPACE:
+                    if event.key == K_ESCAPE:
+                        pygame.quit()
+                        inp = input("Do you want to exit the program (y/n):")
+                        if "y" in inp.lower():
+                            raise SystemExit
+                        else:
+                            main()
+                    elif event.key == K_SPACE:
                         # getCodes.getPic()
                         havePicture = True
 
@@ -174,5 +182,5 @@ def main():
 
 
 if __name__ == "__main__":
-    pygame.init()
+    game = None
     main()

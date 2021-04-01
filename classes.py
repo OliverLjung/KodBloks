@@ -1,5 +1,6 @@
 import pygame
 import random
+from pygame.locals import *
 
 class Game:
 
@@ -230,7 +231,8 @@ class Character():
         x = self._pos[0]
         y = self._pos[1]
         
-        if self._game.map[x][y] == "f":
+        if self._game.map[y][x] == "f":
+            print("finished")
             return False
         else:
             return True
@@ -260,11 +262,11 @@ class Character():
 
 class Window:
     def __init__(self, game):
-        self.win_width = 800
-        self.win_height = 600
+        self.win_width = 1200
+        self.win_height = 900
         self.FPS = 60
 
-        self.window = pygame.display.set_mode((self.win_width, self.win_height)) # Window
+        self.window = pygame.display.set_mode((0, 0), pygame.FULLSCREEN) # Window
         pygame.display.set_caption("Maze Game") # Window title
 
         #rbg
@@ -282,7 +284,6 @@ class Window:
 
 
     def draw(self, game):
-
         
         # detta måste garantera att
     
@@ -318,4 +319,37 @@ class Window:
 
 
     def drawScore(self, character):
-        print(f"Score = {character.score}")
+        
+        pygame.font.init()
+        textFont = pygame.font.SysFont("arial", 100)
+        text = textFont.render(f"Score: {character.score}", True, (0, 0, 0), (255,255,255))
+        textRect = text.get_rect()
+        textRect.center = (1920//2, 1080//2)
+
+        exitFont = pygame.font.SysFont("arial", 64)
+        exitText = exitFont.render("New Game", True, (255,0,0), (0,0,0))
+        exitTextRect = exitText.get_rect()
+        exitPos = (1920//2, 1080-50)
+        exitTextRect.center = exitPos
+
+        self.window.blit(text, textRect)
+        self.window.blit(exitText, exitTextRect)
+        
+        exitPressed = False
+        while not exitPressed:
+            pygame.display.flip()
+            for event in pygame.event.get() :
+                if event.type == pygame.QUIT :
+                    exitPressed=True
+                if event.type == MOUSEBUTTONDOWN:
+                    mPos = pygame.mouse.get_pos()
+                    if (exitPos[0]-150<=mPos[0]<=exitPos[0]+150) and (exitPos[1]-30<=mPos[1]<=exitPos[1]+30):
+                        exitPressed=True
+
+        
+
+        
+
+        
+
+        

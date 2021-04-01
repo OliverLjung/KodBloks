@@ -84,16 +84,26 @@ def getSeq(lib):
     conditions = [pathAheadCode, pathLeftCode, pathRightCode, notFinishedCode]
 
     codes = []
+    stopCodeFound = False
+    startCodeFound = False
 
     for sublib in lib:
         if sublib["code"] == startCode:
             startPos = sublib["pos"]
             lib.remove(sublib)
+            startCodeFound = True
         
         elif sublib["code"] == stopCode:
             stopPos = sublib["pos"]
-            lib.remove(sublib)
-            lib.append(sublib)
+            stoplib = sublib
+            stopCodeFound = True
+
+    if not(startCodeFound and stopCodeFound):
+        debug("noline")
+        return -1
+
+    lib.remove(stoplib)
+    lib.append(stoplib)
 
     xDiff = (stopPos[0]- startPos[0])
     yDiff = (stopPos[1] - startPos[1])
@@ -101,12 +111,15 @@ def getSeq(lib):
     dirVectorLength = math.sqrt(dirVector[0]**2 + dirVector[1]**2)
 
     if dirVectorLength == 0:
+        # Didnt find start and stop
+        debug("noline")
         return -1
 
     dirVector = (dirVector[0]/dirVectorLength , dirVector[1]/dirVectorLength)
 
     if dirVector == (0,0):
         # Didnt find start and stop
+        debug("noline")
         return -1
 
     n = 5
@@ -114,7 +127,7 @@ def getSeq(lib):
     searchForCond = False
     condVector = (-dirVector[1], dirVector[0])
     finished = False
-    codeArea = [(0,0),(0,0)]
+    codeArea = [startPos,startPos]
 
     while not finished:
         for sublib in lib:
@@ -135,6 +148,7 @@ def getSeq(lib):
                         codes.append((code, pos))
                         lib.remove(sublib)
                         searchForCond = True
+                        postemp = pos
                         linePosCond = pos
                     else:
                         codes.append((code, pos))
@@ -144,6 +158,7 @@ def getSeq(lib):
             linePosCond = ((linePosCond[0]+n*condVector[0]), (linePosCond[1]+n*condVector[1]))
             codeArea = [(linePosCond[0]-50, linePosCond[1]-50) , (linePosCond[0]+50, linePosCond[1]+50)]
             if (linePosCond[0] > stopPos[0]+500*condVector[0]) and (linePosCond[1] > stopPos[1]+500*condVector[0]):
+                debug("nocondition", postemp)
                 return -2
         else:
             linePos = ((linePos[0]+n*dirVector[0]), (linePos[1]+n*dirVector[1]))
@@ -152,6 +167,7 @@ def getSeq(lib):
                 finished = True
                     
     if codes == []:
+        debug("noline")
         return -1
 
     codes.reverse()
@@ -195,38 +211,118 @@ def getListSeq(codes, array):
         code = info[0]
         pos = info[1]
         if code not in conditions:
-            debug("conditions", pos)
+            debug("condition", pos)
             raise SystemExit
         else:
             thisList.append(code)
             thisList.append(getListSeq(codes, thisList))
+            return [thisList] + getListSeq(codes, thisList)
     elif code == ifStartCode:
         thisList.append(code)
         info = codes.pop()
         code = info[0]
         pos = info[1]
         if code not in conditions:
-            debug("conditions", pos)
+            debug("condition", pos)
             raise SystemExit
         else:
             thisList.append(code)
             thisList.append(getListSeq(codes, thisList))
+            return [thisList] + getListSeq(codes, thisList)
     elif code == elseStartCode:
         thisList.append(code)
-        info = codes.pop()
-        code = info[0]
-        pos = info[1]
-        if code not in conditions:
-            debug("conditions", pos)
-            raise SystemExit
-        else:
-            thisList.append(code)
-            thisList.append(getListSeq(codes, thisList))
+        thisList.append(getListSeq(codes, thisList))
+        return [thisList] + getListSeq(codes, [])
     else:
         return [[code]] + getListSeq(codes, [])
 
-    return [thisList] + getListSeq(codes, thisList)
+    
         
 
-def debug(errorCode, pos):
-    pass
+def debug(errorCode, pos=(0,0)):
+    if errorCode.lower() == "noline":
+        message = "Start or Finish is missing"
+    elif errorCode.lower() == "nocondition":
+        message = "Condition is missing"
+    elif errorCode.lower() == "nostop":
+        message = "Stop for while/is/else is missing"
+
+    debug = DebugWindow()
+    debug.drawErrorPic(message, pos)
+
+class DebugWindow():
+    def __init__(self, mode=False):
+        self.isControlled = mode
+        self.picture = pygame.image.load("bild.jpg")
+        pygame.init()
+        self.pictureWidth = self.picture.get_width()
+        self.pictureHeight = self.picture.get_height()
+        self.window = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+        pygame.display.set_caption("Debug Window")
+        if self.isControlled:
+            #tänkte kanske en kontrollerad debugger där man kan välja att hoppa stegvis för att följa exekvering
+            pass
+
+    def drawErrorPic(self, message, pos=(0,0)):
+        "Draws arrow and message to given position"
+
+        self.window.fill((255,255,255))
+        self.window.blit(self.picture, (0, 0))
+
+        pygame.font.init()
+
+        textFont = pygame.font.SysFont("arial", 32)
+        text = textFont.render(message, True, (0, 0, 0), (255,255,255))
+        textRect = text.get_rect()
+
+        exitFont = pygame.font.SysFont("arial", 64)
+        exitText = exitFont.render("EXIT", True, (255,0,0), (255,255,255))
+        exitTextRect = exitText.get_rect()
+        exitPos = (1920//2, 1080-50)
+        exitTextRect.center = exitPos
+
+        if pos == (0,0):
+            textRect.center = (self.pictureWidth//2, self.pictureHeight//2)
+        elif pos[1] > 1920//2:
+            arrowPoint = (pos[0], pos[1]+30)
+            arrow = (
+                arrowPoint,
+                (arrowPoint[0]-60, arrowPoint[1]+30),
+                (arrowPoint[0]-30, arrowPoint[1]+30),
+                (arrowPoint[0]-30, arrowPoint[1]+90),
+                (arrowPoint[0]+30, arrowPoint[1]+90),
+                (arrowPoint[0]+30, arrowPoint[1]+30),
+                (arrowPoint[0]+60, arrowPoint[1]+30)
+                )
+            pygame.draw.polygon(self.window, (255, 0 , 0), arrow)
+            textRect.center = (pos[0], pos[1]+30+90+10)
+        elif pos[1] < 1920//2:
+            arrowPoint = (pos[0], pos[1]-30)
+            arrow = (
+                arrowPoint,
+                (arrowPoint[0]-60, arrowPoint[1]-30),
+                (arrowPoint[0]-30, arrowPoint[1]-30),
+                (arrowPoint[0]-30, arrowPoint[1]-90),
+                (arrowPoint[0]+30, arrowPoint[1]-90),
+                (arrowPoint[0]+30, arrowPoint[1]-30),
+                (arrowPoint[0]+60, arrowPoint[1]-30)
+                )
+            pygame.draw.polygon(self.window, (255, 0 , 0), arrow)
+            textRect.center = (pos[0], pos[1]-30-90-10)
+
+        self.window.blit(text, textRect)
+        self.window.blit(exitText, exitTextRect)
+        
+        run=True
+        while run:
+            for event in pygame.event.get() :
+                if event.type == pygame.QUIT :
+                    run=False
+                if event.type == MOUSEBUTTONDOWN:
+                    mPos = pygame.mouse.get_pos()
+                    if (exitPos[0]-16<=mPos[0]<=exitPos[0]+16) and (exitPos[1]-16<=mPos[1]<=exitPos[1]+16):
+                        run=False
+            pygame.display.update() 
+        pygame.quit()
+    def draw(self, pos):
+        pass
