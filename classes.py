@@ -507,5 +507,5 @@ class HelpWindow:
                     raise SystemExit
 
 
-# mywindow = HelpWindow()
-# mywindow.drawHelp()
+mywindow = HelpWindow()
+mywindow.drawHelp()
