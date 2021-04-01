@@ -367,7 +367,7 @@ class HelpWindow:
 
     def eng(self):
         self.eng_text_font = pygame.font.Font('freesansbold.ttf', 14)
-        self.start_text = self.eng_text_font.render('The game startas, beginning of the sequence.', True, self.white,)
+        self.start_text = self.eng_text_font.render('The game starts, beginning of the sequence.', True, self.white,)
         self.start_rect = self.start_text.get_rect()
         self.start_rect.center = (289, 71)
         
@@ -379,6 +379,9 @@ class HelpWindow:
         # self.windw2.blit(self.stop_text, self.stop_rect)        
 
     def drawHelp(self):
+
+        help_window = HelpWindow()
+
         #text size
         self.font = pygame.font.Font('freesansbold.ttf', 25)
         self.text_font = pygame.font.Font('freesansbold.ttf', 17)  
@@ -458,14 +461,34 @@ class HelpWindow:
         self.not_fin_rect = self.not_fin_text.get_rect()
         self.not_fin_rect = (29, 556)
         
+
+        self.windw2.blit(self.bg, (0, 0))
+        self.windw2.blit(self.text, self.text_rect)
+        self.windw2.blit(self.bg, (0, 0))
+        self.windw2.blit(self.text, self.text_rect)
+        self.windw2.blit(self.exit_text, self.exit_react)
+        self.windw2.blit(self.pick_lang_text, self.pick_lang_rect)
+        self.windw2.blit(self.start_text, self.start_rect)
+        self.windw2.blit(self.stop_text, self.stop_rect)
+        self.windw2.blit(self.right_text, self.right_rect)
+        self.windw2.blit(self.left_text, self.left_rect)
+        self.windw2.blit(self.forward_text, self.forward_rect)
+        self.windw2.blit(self.while_text, self.while_rect)
+        self.windw2.blit(self.if_text, self.if_rect)
+        self.windw2.blit(self.else_text, self.else_rect)
+        self.windw2.blit(self.ahead_text, self.ahead_rect)
+        self.windw2.blit(self.path_right_text, self.path_right_rect)
+        self.windw2.blit(self.path_left_text, self.path_left_rect)
+        self.windw2.blit(self.not_fin_text, self.not_fin_rect)
+        
+        help_window.sve()
+        pygame.display.flip()
+
+        lang = "sve"
         hasChanged = False
         run = False
-        help_window = HelpWindow()
         while not run:
             if hasChanged:
-                pygame.display.flip()
-                hasChanged = False
-            for event in pygame.event.get():          
                 self.windw2.blit(self.bg, (0, 0))
                 self.windw2.blit(self.text, self.text_rect)
                 self.windw2.blit(self.bg, (0, 0))
@@ -484,27 +507,33 @@ class HelpWindow:
                 self.windw2.blit(self.path_right_text, self.path_right_rect)
                 self.windw2.blit(self.path_left_text, self.path_left_rect)
                 self.windw2.blit(self.not_fin_text, self.not_fin_rect)
-                help_window.sve()
+                if lang == "sve":
+                    help_window.sve()
+                elif lang == "eng":
+                    help_window.eng()
+
                 pygame.display.flip()
+                hasChanged = False
+
+            for event in pygame.event.get():          
+                
                 if event.type == pygame.MOUSEBUTTONDOWN: 
                     self.mx, self.my = pygame.mouse.get_pos()
-                    print(self.mx,self.my)
                     #Exit knappen
                     if self.mx >= 225 and self.mx <= 275 and self.my >= 600 and self.my <= 620:
                         run = False
-                        raise SystemExit
+                        pygame.quit()
                     #Sve knappen
                     if self.mx >= 405 and self.mx <= 430 and self.my >= 38 and self.my <= 51:
-                        help_window.sve()
-                        pygame.display.flip()
+                        lang = "sve"
+                        hasChanged = True
                     #Eng knappen
                     if self.mx >= 440 and self.mx <= 469 and self.my >= 40  and self.my <= 55:
-                        help_window.eng()
-                        pygame.display.flip()
+                        lang = "eng"
                         hasChanged = True
                 if event.type == pygame.QUIT: 
                     run =  False
-                    raise SystemExit
+                    pygame.quit()
 
 
 mywindow = HelpWindow()
