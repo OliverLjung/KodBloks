@@ -359,10 +359,16 @@ class HelpWindow:
 
     def sve(self):
         self.sve_text_font = pygame.font.Font('freesansbold.ttf', 14)
-        self.sve_text = self.sve_text_font.render('Spelet startas, början av sekvensen.', True, self.white,)
-        self.sve_rect = self.sve_text.get_rect()
-        self.sve_rect.center = (260, 70)
-        self.windw2.blit(self.sve_text, self.sve_rect)
+        self.start_text = self.sve_text_font.render('Spelet startas, början av sekvensen.', True, self.white,)
+        self.start_rect = self.start_text.get_rect()
+        self.start_rect.center = (260, 70)
+        self.stop_text = self.sve_text_font.render('Spelet avslutas, slutet av sekvensen.', True, self.white,)
+        self.stop_rect = self.stop_text.get_rect()
+        self.stop_rect.center = (260, 115)
+
+        self.windw2.blit(self.start_text, self.start_rect)
+        self.windw2.blit(self.stop_text, self.stop_rect)
+
 
 
     def eng(self):
@@ -370,13 +376,12 @@ class HelpWindow:
         self.start_text = self.eng_text_font.render('The game starts, beginning of the sequence.', True, self.white,)
         self.start_rect = self.start_text.get_rect()
         self.start_rect.center = (289, 71)
+        self.stop_text = self.eng_text_font.render('Game ends, end of the sequence.', True, self.white,)
+        self.stop_rect = self.start_text.get_rect()
+        self.stop_rect.center = (285, 115)
         
-        # self.stop_text = self.eng_text_font.render('The game is ended.', True, self.red,)
-
-        # self.stop_rect = self.start_text.get_rect()
-        # self.stop_rect.center = (210, 117)
         self.windw2.blit(self.start_text, self.start_rect)
-        # self.windw2.blit(self.stop_text, self.stop_rect)        
+        self.windw2.blit(self.stop_text, self.stop_rect)        
 
     def drawHelp(self):
 
@@ -511,12 +516,10 @@ class HelpWindow:
                     help_window.sve()
                 elif lang == "eng":
                     help_window.eng()
-
                 pygame.display.flip()
                 hasChanged = False
 
             for event in pygame.event.get():          
-                
                 if event.type == pygame.MOUSEBUTTONDOWN: 
                     self.mx, self.my = pygame.mouse.get_pos()
                     #Exit knappen
