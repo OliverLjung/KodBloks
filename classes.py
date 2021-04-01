@@ -287,11 +287,6 @@ class Window:
         self.width = 55 - self.margin 
         self.height = 55 - self.margin
 
-
-
-    
-        
-
     def draw(self, game):
         # detta måste garantera att
     
@@ -350,8 +345,12 @@ class HelpWindow:
     def __init__(self):
         pygame.init()
         pygame.font.init()
+
         self.bg = pygame.image.load('bg.jpg') #Bakgrund 
 
+        self.windw2 = pygame.display.set_mode([self.bg.get_width(), self.bg.get_height()])
+        pygame.display.set_caption("Instruction window")
+        
         self.black = (0, 0, 0)
         self.white = (255, 255,255)
         self.red = (255, 0, 0)
@@ -359,29 +358,27 @@ class HelpWindow:
         self.blue = (0, 0, 255)
 
     def sve(self):
-        self.sve_text_font = pygame.font.Font('freesansbold.ttf', 13)
-        self.sve_text = self.sve_text_font.render('Spelet startas', True, self.black,)
+        self.sve_text_font = pygame.font.Font('freesansbold.ttf', 14)
+        self.sve_text = self.sve_text_font.render('Spelet startas, början av sekvensen.', True, self.white,)
         self.sve_rect = self.sve_text.get_rect()
-        self.sve_rect.center = (200, 65)
+        self.sve_rect.center = (260, 70)
         self.windw2.blit(self.sve_text, self.sve_rect)
 
+
     def eng(self):
-        Ceng_text_font = pygame.font.Font('freesansbold.ttf', 14)
-        self.start_text = self.eng_text_font.render('The game is started.', True, self.red,)
+        self.eng_text_font = pygame.font.Font('freesansbold.ttf', 14)
+        self.start_text = self.eng_text_font.render('The game startas, beginning of the sequence.', True, self.white,)
         self.start_rect = self.start_text.get_rect()
-        self.start_rect.center = (213, 73)
+        self.start_rect.center = (289, 71)
         
-        self.stop_text = self.eng_text_font.render('The game is ended.', True, self.red,)
-        self.stop_rect = self.start_text.get_rect()
-        self.stop_rect.center = (210, 117)
+        # self.stop_text = self.eng_text_font.render('The game is ended.', True, self.red,)
+
+        # self.stop_rect = self.start_text.get_rect()
+        # self.stop_rect.center = (210, 117)
         self.windw2.blit(self.start_text, self.start_rect)
-        self.windw2.blit(self.stop_text, self.stop_rect)        
+        # self.windw2.blit(self.stop_text, self.stop_rect)        
 
     def drawHelp(self):
-        
-        self.windw2 = pygame.display.set_mode((self.bg.get_width(), self.bg.get_()))
-        pygame.display.set_caption("Instruction window")
-
         #text size
         self.font = pygame.font.Font('freesansbold.ttf', 25)
         self.text_font = pygame.font.Font('freesansbold.ttf', 17)  
@@ -397,81 +394,118 @@ class HelpWindow:
         self.exit_react.center = (250, 610)
 
         #Välj språk, Sve eller Eng
-        self.pick_lang_text = self.lang_font.render('Sve/Eng', True, self.red,)
+        self.pick_lang_text = self.lang_font.render('Sve/Eng', True, self.white,)
         self.pick_lang_rect = self.pick_lang_text.get_rect()
         self.pick_lang_rect = (405, 38)
 
         #Start block
         self.start_text = self.text_font.render('Start block: ', True, self.black,)
         self.start_rect = self.start_text.get_rect()
-        self.start_rect = (45, 63)
+        self.start_rect = (29, 61)
 
         #Stop block
         self.stop_text = self.text_font.render('Stop block: ', True, self.black,)
         self.stop_rect = self.stop_text.get_rect()
-        self.stop_rect = (45, 107)
+        self.stop_rect = (29, 106)
 
-        #Draws initial image before changes can be applied
-        self.windw2.blit(self.bg, (0, 0))
+        #Turn right block
+        self.right_text = self.text_font.render('Turn right block: ', True, self.black)
+        self.right_rect = self.right_text.get_rect()
+        self.right_rect = (29, 151)
 
-        self.windw2.blit(self.text, self.text_rect)
+        #Turn left block
+        self.left_text = self.text_font.render('Turn left block: ', True, self.black)
+        self.left_rect = self.left_text.get_rect()
+        self.left_rect = (29, 195)
+
+        #Go forward block
+        self.forward_text = self.text_font.render('Go forward block: ', True, self.black)
+        self.forward_rect = self.forward_text.get_rect()
+        self.forward_rect = (29, 241)
+
+        #While block
+        self.while_text = self.text_font.render('While block: ', True, self.black)
+        self.while_rect = self.while_text.get_rect()
+        self.while_rect = (29, 286)
+
+        #If-block
+        self.if_text = self.text_font.render('If block: ', True, self.black)
+        self.if_rect = self.if_text.get_rect()
+        self.if_rect = (29, 331)
+
+        #Else block
+        self.else_text = self.text_font.render('Else block: ', True, self.black)
+        self.else_rect = self.else_text.get_rect()
+        self.else_rect = (29, 376)
+
+        #Path ahead block
+        self.ahead_text = self.text_font.render('Path ahead block: ', True, self.black)
+        self.ahead_rect= self.ahead_text.get_rect()
+        self.ahead_rect = (29, 421)
+
+        #Path right block
+        self.path_right_text = self.text_font.render('Path right block: ', True, self.black)
+        self.path_right_rect= self.path_right_text.get_rect()
+        self.path_right_rect = (29, 466)
+
+        #Path left block
+        self.path_left_text = self.text_font.render('Path left block: ', True, self.black)
+        self.path_left_rect= self.path_left_text.get_rect()
+        self.path_left_rect = (29, 511)
+
+        #Not finished block
+        self.not_fin_text = self.text_font.render('Not finished block: ', True, self.black)
+        self.not_fin_rect = self.not_fin_text.get_rect()
+        self.not_fin_rect = (29, 556)
         
-        self.windw2.blit(self.bg, (0, 0))
-        self.windw2.blit(self.text, self.text_rect)
-        self.windw2.blit(self.exit_text, self.exit_react)
-        
-        self.i = 70 
-        pygame.draw.circle(self.windw2, self.black, (37,self.i), 5) #Punkt    
-        self.i+= 45
-
-        self.windw2.blit(self.start_text, self.start_rect)
-        self.windw2.blit(self.stop_text, self.stop_rect)
-        pygame.display.flip()
-
         hasChanged = False
-
-
-        self.run = False
-        while not self.run:
+        run = False
+        help_window = HelpWindow()
+        while not run:
             if hasChanged:
                 pygame.display.flip()
                 hasChanged = False
-            
-            self.windw2.blit(self.bg, (0, 0))
-
-            self.windw2.blit(self.text, self.text_rect)
-            
-            for event in pygame.event.get():
+            for event in pygame.event.get():          
+                self.windw2.blit(self.bg, (0, 0))
+                self.windw2.blit(self.text, self.text_rect)
                 self.windw2.blit(self.bg, (0, 0))
                 self.windw2.blit(self.text, self.text_rect)
                 self.windw2.blit(self.exit_text, self.exit_react)
-                
-                self.i = 70 
-                while self.i >= 70 and self.i <= 580:
-                    pygame.draw.circle(self.windw2, self.black, (37,self.i), 5) #Punkt    
-                    self.i+= 45
-
+                self.windw2.blit(self.pick_lang_text, self.pick_lang_rect)
                 self.windw2.blit(self.start_text, self.start_rect)
                 self.windw2.blit(self.stop_text, self.stop_rect)
-
-                
+                self.windw2.blit(self.right_text, self.right_rect)
+                self.windw2.blit(self.left_text, self.left_rect)
+                self.windw2.blit(self.forward_text, self.forward_rect)
+                self.windw2.blit(self.while_text, self.while_rect)
+                self.windw2.blit(self.if_text, self.if_rect)
+                self.windw2.blit(self.else_text, self.else_rect)
+                self.windw2.blit(self.ahead_text, self.ahead_rect)
+                self.windw2.blit(self.path_right_text, self.path_right_rect)
+                self.windw2.blit(self.path_left_text, self.path_left_rect)
+                self.windw2.blit(self.not_fin_text, self.not_fin_rect)
+                help_window.sve()
+                pygame.display.flip()
                 if event.type == pygame.MOUSEBUTTONDOWN: 
                     self.mx, self.my = pygame.mouse.get_pos()
+                    print(self.mx,self.my)
                     #Exit knappen
                     if self.mx >= 225 and self.mx <= 275 and self.my >= 600 and self.my <= 620:
                         run = False
                         raise SystemExit
                     #Sve knappen
                     if self.mx >= 405 and self.mx <= 430 and self.my >= 38 and self.my <= 51:
-                        HelpWindow.sve()
+                        help_window.sve()
+                        pygame.display.flip()
                     #Eng knappen
                     if self.mx >= 440 and self.mx <= 469 and self.my >= 40  and self.my <= 55:
-                        HelpWindow.eng()
-
-
+                        help_window.eng()
+                        pygame.display.flip()
+                        hasChanged = True
                 if event.type == pygame.QUIT: 
                     run =  False
                     raise SystemExit
+
 
 mywindow = HelpWindow()
 mywindow.drawHelp()

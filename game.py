@@ -168,7 +168,6 @@ def main():
                     x_pos, y_pos = pygame.mouse.get_pos()
                     if x_pos >= 630 and x_pos <= 735 and y_pos >= 60 and y_pos <= 90:
                         help_window.drawHelp() 
-
                 elif event.type == pygame.QUIT: 
                     game.game.run = False
                     raise SystemExit
