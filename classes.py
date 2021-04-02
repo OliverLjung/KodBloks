@@ -365,10 +365,21 @@ class HelpWindow:
         self.stop_text = self.sve_text_font.render('Spelet avslutas, slutet av sekvensen.', True, self.white,)
         self.stop_rect = self.stop_text.get_rect()
         self.stop_rect.center = (260, 115)
+        self.turnR_text = self.sve_text_font.render('Karaktären svänger höger.', True, self.white,)
+        self.turnR_rect = self.turnR_text.get_rect()
+        self.turnR_rect.center = (260, 160)
+        self.turnL_text = self.sve_text_font.render('Karaktären svänger vänster.', True, self.white,)
+        self.turnL_rect = self.turnL_text.get_rect()
+        self.turnL_rect.center = (255, 205)
+        self.go_forward_text = self.sve_text_font.render('Karaktären kommer att gå framåt.', True, self.white,)
+        self.go_forward_rect = self.go_forward_text.get_rect()
+        self.go_forward_rect.center = (295, 250)
 
         self.windw2.blit(self.start_text, self.start_rect)
         self.windw2.blit(self.stop_text, self.stop_rect)
-
+        self.windw2.blit(self.turnR_text, self.turnR_rect)
+        self.windw2.blit(self.turnL_text, self.turnL_rect)
+        self.windw2.blit(self.go_forward_text, self.go_forward_rect)
 
 
     def eng(self):
@@ -379,12 +390,24 @@ class HelpWindow:
         self.stop_text = self.eng_text_font.render('Game ends, end of the sequence.', True, self.white,)
         self.stop_rect = self.start_text.get_rect()
         self.stop_rect.center = (285, 115)
+        self.turnR_text = self.sve_text_font.render('The character turns right.', True, self.white,)
+        self.turnR_rect = self.turnR_text.get_rect()
+        self.turnR_rect.center = (260, 161)
+        self.turnL_text = self.sve_text_font.render('The character turns left.', True, self.white,)
+        self.turnL_rect = self.turnL_text.get_rect()
+        self.turnL_rect.center = (240, 205)
+        self.go_forward_text = self.sve_text_font.render('The character will turn right.', True, self.white,)
+        self.go_forward_rect = self.go_forward_text.get_rect()
+        self.go_forward_rect.center = (278, 250)
         
         self.windw2.blit(self.start_text, self.start_rect)
         self.windw2.blit(self.stop_text, self.stop_rect)        
+        self.windw2.blit(self.turnR_text, self.turnR_rect)   
+        self.windw2.blit(self.turnL_text, self.turnL_rect)   
+        self.windw2.blit(self.go_forward_text, self.go_forward_rect)
+
 
     def drawHelp(self):
-
         help_window = HelpWindow()
 
         #text size
@@ -518,7 +541,6 @@ class HelpWindow:
                     help_window.eng()
                 pygame.display.flip()
                 hasChanged = False
-
             for event in pygame.event.get():          
                 if event.type == pygame.MOUSEBUTTONDOWN: 
                     self.mx, self.my = pygame.mouse.get_pos()
@@ -537,7 +559,6 @@ class HelpWindow:
                 if event.type == pygame.QUIT: 
                     run =  False
                     pygame.quit()
-
-
-mywindow = HelpWindow()
-mywindow.drawHelp()
+                    
+# mywindow = HelpWindow()
+# mywindow.drawHelp()
