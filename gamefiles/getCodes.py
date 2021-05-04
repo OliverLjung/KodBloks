@@ -142,6 +142,8 @@ def get_codes():
         codesLib["pos"] = (x, y)
         codesList.append(codesLib)
 
+    print(codesList)
+
     codes = get_seq(codesList)
     return codes
 
@@ -266,8 +268,10 @@ def get_seq(lib):
                 finished = True
                     
     if codes == []:
-        debug("noline")
+        # debug("noline")
         return -1
+
+    print(codes)
 
     codes.reverse()
 
@@ -319,8 +323,8 @@ def get_list_seq(codes, array):
             game.stopGame()
         else:
             thisList.append(code)
-            thisList.append(getListSeq(codes, thisList))
-            return [thisList] + getListSeq(codes, thisList)
+            thisList.append(get_list_seq(codes, thisList))
+            return [thisList] + get_list_seq(codes, thisList)
     elif code == ifStartCode:
         thisList.append(code)
         info = codes.pop()
@@ -331,14 +335,14 @@ def get_list_seq(codes, array):
             game.stopGame()
         else:
             thisList.append(code)
-            thisList.append(getListSeq(codes, thisList))
-            return [thisList] + getListSeq(codes, thisList)
+            thisList.append(get_list_seq(codes, thisList))
+            return [thisList] + get_list_seq(codes, thisList)
     elif code == elseStartCode:
         thisList.append(code)
-        thisList.append(getListSeq(codes, thisList))
-        return [thisList] + getListSeq(codes, [])
+        thisList.append(get_list_seq(codes, thisList))
+        return [thisList] + get_list_seq(codes, [])
     else:
-        return [[code]] + getListSeq(codes, [])
+        return [[code]] + get_list_seq(codes, [])
 
     
         
@@ -381,9 +385,6 @@ class DebugWindow():
         self.pictureHeight = self.picture.get_height()
         self.window = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
         pygame.display.set_caption("Debug Window")
-        if self.isControlled:
-            #tänkte kanske en kontrollerad debugger där man kan välja att hoppa stegvis för att följa exekvering
-            pass
 
     def draw_error_pic(self, message, pos=(0,0)):
         """

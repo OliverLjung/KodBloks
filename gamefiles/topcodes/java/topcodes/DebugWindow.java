@@ -68,7 +68,7 @@ public class DebugWindow
    public DebugWindow() {
       
       this.scanner = new Scanner();
-      this.scanner.setMaxCodeDiameter(300);
+      this.scanner.setMaxCodeDiameter(100);
 
       // create file list
       this.file = "bild.jpg";

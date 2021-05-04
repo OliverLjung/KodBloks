@@ -29,31 +29,31 @@ expectedResult = {
     "3": [startCode, whileStartCode, pathAheadCode, moveForward, endCode, stopCode],
     "4": [startCode, whileStartCode, pathAheadCode, moveForward, endCode, stopCode],
     "5": [startCode, ifStartCode, pathRightCode, moveForward, endCode, elseStartCode,turnLeft, endCode,stopCode],
-    "6": [],
-    "7": [],
-    "8": [],
-    "9": [],
-    "10": [],
-    "11": [],
-    "12": [],
-    "13": [],
-    "14": [],
-    "15": [],
-    "16": [],
-    "17": [],
-    "18": [],
-    "19": [],
-    "20": []
+    "6": [ifStartCode, turnLeft, endCode, whileStartCode, pathRightCode, stopCode, startCode],
+    "7": [ifStartCode, whileStartCode, pathRightCode, stopCode],
+    "8": [endCode, endCode, endCode, pathAheadCode, startCode],
+    "9": [startCode, turnLeft, endCode, endCode, elseStartCode],
+    "10": [turnLeft, ifStartCode, moveForward, pathAheadCode, startCode],
+    "11": [whileStartCode, turnLeft, ifStartCode, moveForward, pathAheadCode, notFinishedCode, startCode],
+    "12": [endCode, endCode, endCode, stopCode],
+    "13": [notFinishedCode, endCode, endCode, endCode, stopCode, startCode, pathAheadCode],
+    "14": [notFinishedCode, endCode, endCode, endCode, stopCode, startCode, pathAheadCode],
+    "15": [notFinishedCode, ifStartCode, endCode, endCode, endCode, stopCode, startCode, whileStartCode, pathAheadCode, moveForward, turnLeft],
+    "16": [notFinishedCode, ifStartCode, startCode, whileStartCode, pathAheadCode, moveForward, turnLeft],
+    "17": [notFinishedCode, ifStartCode, startCode, stopCode, whileStartCode, pathAheadCode, moveForward, turnLeft],
+    "18": [notFinishedCode, turnRight, ifStartCode, startCode, stopCode, whileStartCode, pathRightCode, pathAheadCode, moveForward, turnLeft],
+    "19": [turnRight, ifStartCode, stopCode, pathRightCode, whileStartCode, pathAheadCode],
+    "20": [stopCode, startCode]
 }
 
 stats = 0
-sizeofTest = 5
+sizeofTest = 20
 
 print("""
 ### Test topcodes libary ###
 This test is conducted to establish how spotcodes have to behave in picture for topcodes to read them correctly
-Currently the max diameter of the spotcodes in topcodes is set to 300 pixels,
-this.scanner.setMaxCodeDiameter(300)
+Currently the max diameter of the spotcodes in topcodes is set to 100 pixels,
+this.scanner.setMaxCodeDiameter(100)
 
 """)
 

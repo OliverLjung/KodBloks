@@ -1,5 +1,7 @@
 bild.jpg
-Found 0 codes.
-15435 candidates.
-1170 tested.
-206ms elapsed time.
+Found 2 codes.
+33354 candidates.
+1368 tested.
+topcode=87, pos=(1310,521)
+topcode=681, pos=(989,544)
+275ms elapsed time.
