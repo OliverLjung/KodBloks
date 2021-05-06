@@ -114,7 +114,9 @@ def getPic():
     while Camera.picReady is False:
         time.sleep(0.1)
     image = cv2.imread("bildSRC.jpg")
-    cv2.imwrite("bild.jpg", image)
+    success = False
+    while not success:
+        success = cv2.imwrite("bild.jpg", image)
     Camera.halt_setter(False) 
         
 def get_codes():

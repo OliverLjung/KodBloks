@@ -20,13 +20,13 @@ class Camera:
         cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
 
         while True:
-            if (Camera.halt is True) and (Camera.picReady is True):
+            if (Camera.halt is True) and (Camera.picReady is True) :
                 time.sleep(0.1)
                 continue
             
+            Camera.picReady = False
             successPic,image = cam.read()
             if successPic:
-                Camera.picReady = False
                 successWrite = cv2.imwrite("bildSRC.jpg", image)
                 if successWrite:
                     Camera.picReady = True
@@ -34,6 +34,14 @@ class Camera:
                 Camera.picReady = False
                 
             if stop() is True:
+                removedPic = np.zeros((700,700,3))
+                cam.release()
+                # successWrite1, successWrite2 = False, False
+                # while (successWrite1, successWrite2) == (False, False):
+                #     if not successWrite1:
+                #         successWrite1 = cv2.imwrite("bildSRC.jpg", removedPic)
+                #     if not successWrite2:
+                #         successWrite2 = cv2.imwrite("bild.jpg", removedPic)
                 break
 
     def halt_setter(status):
