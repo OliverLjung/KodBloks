@@ -1,6 +1,7 @@
 import time
 import numpy as np
 import cv2
+from var import Config
 
 class Camera:
     """
@@ -13,27 +14,20 @@ class Camera:
         """
         Function; args stop (Bool), the main function of camera; runs until stop is True.
         """
-        camNum = 1
-        try:
-            cam = cv2.VideoCapture(camNum)
-            if cam is None:
-                raise Exception
-        except Exception:
-            camNum = 0
-            try:
-                cam = cv2.VideoCapture(camNum)
-                if cam is None:
-                    raise Exception
-            except Exception:
-                print("Camera couldn't be loaded.")
-                raise SystemExit
+        cam = cv2.VideoCapture(1)
+        if not cam.isOpened():
+            # (Failed): Trying to find external camera (for laptop).
+            cam = cv2.VideoCapture(0)
+            if not cam.isOpened():
+                # (Failed): Trying to find external camera (for stat. computer) or laptop's built in camera.
+                Config.stopThreads_setter(True)
 
         cam.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
         cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
         Camera.halt = False
         Camera.picReady = False
         
-        while True:
+        while cam.isOpened():
             if (Camera.halt is True) and (Camera.picReady is True) :
                 time.sleep(0.1)
                 continue
@@ -48,15 +42,16 @@ class Camera:
                 Camera.picReady = False
                 
             if stop() is True:
-                removedPic = np.zeros((700,700,3))
-                cam.release()
-                successWrite1, successWrite2 = False, False
-                while (successWrite1, successWrite2) == (False, False):
-                    if not successWrite1:
-                        successWrite1 = cv2.imwrite("bildSRC.jpg", removedPic)
-                    if not successWrite2:
-                        successWrite2 = cv2.imwrite("bild.jpg", removedPic)
                 break
+
+        removedPic = np.zeros((700,700,3))
+        cam.release()
+        successWrite1, successWrite2 = False, False
+        while (successWrite1, successWrite2) == (False, False):
+            if not successWrite1:
+                successWrite1 = cv2.imwrite("bildSRC.jpg", removedPic)
+            if not successWrite2:
+                successWrite2 = cv2.imwrite("bild.jpg", removedPic)
 
     def halt_setter(status):
         """
