@@ -212,7 +212,7 @@ def main(new=0):
     global game
     pygame.init()
 
-    if Config.stopThreads is True:
+    if Config.stopThreads == True:
         stop_game()
 
     if new == 1:
@@ -240,6 +240,8 @@ def main(new=0):
     helpPos = (1300, 200)
 
     while run:
+        if Config.stopThreads == True:
+            stop_game()
         # Station logic
         ### takes picture when some event is given
         game.window.draw()
@@ -286,11 +288,14 @@ def stop_game():
 
 if __name__ == "__main__":
     game = None
-    pygame.mixer.pre_init(44100, -16, 2, 2048) # setup mixer to avoid sound lag
-    pygame.init()
-    pygame.mixer.init()
-    pygame.mixer.music.load("music/game.ogg")
-    pygame.mixer.music.play(loops=-1)
+    try:
+        pygame.mixer.pre_init(44100, -16, 2, 2048) # setup mixer to avoid sound lag
+        pygame.init()
+        pygame.mixer.init()
+        pygame.mixer.music.load("music/game.ogg")
+        pygame.mixer.music.play(loops=-1)
+    except Exception:
+        print("Couldn't load audio.")
     
     Config.stopThreads_setter(False)
     cam = threading.Thread(target= Camera.camera_thread, args =(lambda : Config.stopThreads, ))

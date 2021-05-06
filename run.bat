@@ -1,3 +1,3 @@
-cd C:\Bloks\gamefiles
+cd gamefiles
 python game.py
 pause
