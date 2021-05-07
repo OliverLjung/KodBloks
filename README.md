@@ -39,8 +39,8 @@ Spelet går ut på att ta karaktären, en slime genom en labyrint med hjälp av 
 * while (medans)
 * if/else (Om/eller)
 
-* Karaktären kan gå framåt/vänster/höger?
-* Karaktären är klar (i mål)?
+* Karaktären kan gå framåt/vänster/höger
+* Karaktären är klar (i mål)
 * Stop block
 
 ## Insperations-källor
@@ -79,7 +79,7 @@ The game is about taking the game character, a slime through a maze using simple
 * While
 * If/Else
 * The character can go forward/left/right
-* The character is finished (in the goal)?
+* The character is finished (in the goal)
 * Stop block
 
 ## Inspiration sources
