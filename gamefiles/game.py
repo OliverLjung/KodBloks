@@ -50,7 +50,7 @@ class Main:
         Function: Gets codes from webcam, starts game and runs until game is finished or character has bumped into a wall.
         """
         self._codes = getCodes.get_codes()
-        print(f"Initial codes: {self._codes}\n")
+
         if self._codes == -1: 
             # missing start or stop
             self._window.draw()
@@ -217,19 +217,15 @@ def main(new=0):
 
     if new == 1:
         # map should remain the same
-        print("RESET")
         game.reset()
 
     else:
         if type(game) == type(None):
-            print("INIT")
             game = Main()
         elif game.game.finished:
-            print("FINISH!!!")
             game.window.draw_score()
             game = Main()
         else:
-            print("FAILED")
             game.window.draw_score()
             game.reset()
             

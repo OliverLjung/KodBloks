@@ -13,9 +13,11 @@
 
 
 # Svenska
-KodBloks är en av produkterna i ett projekt mellan BTHs studenter och Okatima/Kreativum med mål att locka en äldre målgrupp till Kreativum. Vid vår vistelse på Kreativum vi tyckte att det saknades installationer som var mer teknikorienterade. Vi tyckte att det va en god idé att kombinera nybörjar programmering, problemlösning och Kreativums taktila format; att känna på och se installationen för att skapa en ny, mer teknik orienterad installation: Ett spel som kontrolleras med hjälp av block med programmeringslogik.
+KodBloks är en av produkterna i ett projekt mellan BTHs studenter och Okatima/Kreativum med mål att locka en äldre målgrupp till Kreativum. Vid vår vistelse på Kreativum tyckte vi att det saknades installationer som var mer teknikorienterade. Vi tyckte att det var en god idé att kombinera nybörjarprogrammering, problemlösning och Kreativums taktila format, dvs att känna på och se installationerna. Vi försökte därför att skapa en ny, mer teknik orienterad installation. Vi skapade ett spel som kontrolleras med hjälp av block med programmeringslogik.
 
-Spelet är ett proof of concept till idéen påtaglig programmering. Vi hittade vår tekniska lösning genom TopCodes och idéer genom Tern som använder sig av TopCodes men också Google Project Blocks, Scratch och flera.
+Vi tror att spelet skulle passa på Kreativum eftersom programmering idag, för grundskola och gymnasie är ett distant och okänt koncept. Vi tror att ta programmeringens mest grundläggande koncept och kontrollera dessa utanför dator och syntax för att lösa en enkel uppgift ger besökare en kul och lärorik introduktion till var vi upplever grundskola och gymnasie missar.
+
+Spelet är än så länge ett proof of concept till idéen påtaglig programmering (tangible programming). Vi hittade vår tekniska lösning genom TopCodes och idéer genom Tern som använder sig av TopCodes men också Google Project Blocks, Scratch och flera.
 
 ## Spelet
 ### Krav

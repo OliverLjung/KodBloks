@@ -142,8 +142,6 @@ def get_codes():
         codesLib["pos"] = (x, y)
         codesList.append(codesLib)
 
-    print(codesList)
-
     codes = get_seq(codesList)
     return codes
 
@@ -227,9 +225,9 @@ def get_seq(lib):
     t0 = time.time()
 
     while not finished:
-        # if 10 < (time.time() - t0):
-        #     print("Stuck in loop")
-        #     game.stopGame()
+        if 10 < (time.time() - t0):
+            print("Stuck in loop")
+            game.stopGame()
 
         for sublib in lib:
             code = sublib["code"]
