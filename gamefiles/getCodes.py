@@ -39,7 +39,7 @@ def buttons_image():
     runbuttonPos = [(0,0), (0,0)]
     runButtonCode = 0
 
-    getPic()
+    get_pic()
     os.system("java -cp topcodes.jar topcodes.DebugWindow > fil")
 
     codesLib = get_codes_for_image()
@@ -103,7 +103,7 @@ def get_pic_flip():
     image = pygame.transform.scale(image, (1920, 1080))
     pygame.image.save(image, "bild.jpg")
 
-def getPic():
+def get_pic():
     """
     Function: Halts camera thread and when picture is ready takes the picuture "bildSRC.jpg" and saves the picture in "bild.jpg".
     """
@@ -123,8 +123,6 @@ def get_codes():
     """
     Function: Gets codes in "bild.jpg" from "fil" and sends a list of codes to getSeq() and in the end returns a list of sublists of runnable sequences.
     """
-    global t0
-    t0 = time.time()
     while not os.path.exists("fil"):
         time.sleep(0.1)
     fil = open("fil", "r")
@@ -225,10 +223,13 @@ def get_seq(lib):
     finished = False
     codeArea = [startPos,startPos]
 
+    global t0
+    t0 = time.time()
+
     while not finished:
-        if 10 < (time.time() - t0):
-            print("Stuck in loop")
-            game.stopGame()
+        # if 10 < (time.time() - t0):
+        #     print("Stuck in loop")
+        #     game.stopGame()
 
         for sublib in lib:
             code = sublib["code"]
@@ -260,20 +261,29 @@ def get_seq(lib):
         if searchForCond:
             linePosCond = ((linePosCond[0]+n*condVector[0]), (linePosCond[1]+n*condVector[1]))
             codeArea = [(linePosCond[0]-50, linePosCond[1]-50) , (linePosCond[0]+50, linePosCond[1]+50)]
-            if (linePosCond[0] > stopPos[0]+500*condVector[0]) and (linePosCond[1] > stopPos[1]+500*condVector[0]):
+            if (linePosCond[0] > postemp[0]+500*condVector[0]) and (linePosCond[1] > postemp[1]+500*condVector[1]):
                 debug("nocondition", postemp)
                 return -2
         else:
             linePos = ((linePos[0]+n*dirVector[0]), (linePos[1]+n*dirVector[1]))
             codeArea = [(linePos[0]-50, linePos[1]-50) , (linePos[0]+50, linePos[1]+50)]
-            if (linePos[0] > stopPos[0]) and (linePos[1] > stopPos[1]):
-                finished = True
-                    
+            if startPos[0] > stopPos[0]:
+                if startPos[1] > stopPos[1]:
+                    if (linePos[0] < stopPos[0]) and (linePos[1] < stopPos[1]):
+                        finished = True
+                else:
+                    if (linePos[0] < stopPos[0]) and (linePos[1] > stopPos[1]):
+                        finished = True
+            else:
+                if startPos[1] > stopPos[1]:
+                    if (linePos[0] > stopPos[0]) and (linePos[1] < stopPos[1]):
+                        finished = True
+                else:
+                    if (linePos[0] > stopPos[0]) and (linePos[1] > stopPos[1]):
+                        finished = True
+                             
     if codes == []:
-        # debug("noline")
         return -1
-
-    print(codes)
 
     codes.reverse()
 

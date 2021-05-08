@@ -231,7 +231,7 @@ def main(new=0):
         else:
             print("FAILED")
             game.window.draw_score()
-            game.game.reset()
+            game.reset()
             
 
     run = True
@@ -260,7 +260,7 @@ def main(new=0):
                         main(1)
                     elif (runPos[0]<= xPos <= runPos[0]+180) and (runPos[1] <= yPos <= runPos[1]+70):
                         game.window.draw_compile()
-                        getCodes.getPic()
+                        # getCodes.get_pic()
                         havePicture = True
                 elif event.type == KEYDOWN or event.type == KEYUP:
                     if event.key == K_ESCAPE:

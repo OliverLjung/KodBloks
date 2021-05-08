@@ -17,7 +17,7 @@ class Game:
         self._map = []
         self._map_size = (0, 0)
         self.get_map()
-        self._startingMap = self.copy_map()
+        self._startingMap = self.copy_map(self._map)
         self.start()
 
     def start(self):
@@ -29,12 +29,12 @@ class Game:
         self._finished = False
         self._character = Character(self)
 
-    def copy_map(self):
+    def copy_map(self, listmap):
         """
         Function: Copying the map
         """
         copy = []
-        for line in self._map:
+        for line in listmap:
             copy.append(line.copy())
         return copy
 
@@ -42,7 +42,7 @@ class Game:
         """
         Function: Reset the game
         """
-        self._map = self._startingMap
+        self._map = self.copy_map(self._startingMap)
         self.start()
 
     def update(self):
@@ -135,6 +135,10 @@ class Game:
     def run(self):
         return self._run
 
+    @run.setter
+    def run(self, status):
+        self._run = status
+
     @property
     def character(self):
         return self._character
@@ -142,6 +146,10 @@ class Game:
     @property
     def collision(self):
         return self._collision
+
+    @collision.setter
+    def collision(self, status):
+        self._collision = status
 
     @property
     def finished(self):
@@ -156,8 +164,8 @@ class Character():
     """
     Class: Functionally of the character
     """
-    def __init__(self, game):
-        self._direction = "EAST"
+    def __init__(self, game, direction="EAST"):
+        self._direction = direction
         self._game = game
         self._score = 0
         self._pos = self.get_init_pos()
@@ -191,10 +199,12 @@ class Character():
         elif self._direction == "SOUTH":
             y+=1
 
-        if (x>=0) and (y>=0):
+        if (self._game.map_size[0]-1>=x>=0) and (self._game.map_size[1]-1>=y>=0):
             self._pos = (x,y)
         else:
             print("index out of bounds")
+            self._game.collision = True
+            self._game.run = False
 
     def turn_right(self):
         """
@@ -258,8 +268,8 @@ class Character():
         """
         Function: The path right block, the character can turn right
         """
-        x = self._pos[0]
-        y = self._pos[1]
+        x = self._pos[0].copy()
+        y = self._pos[1].copy()
         if self._game.map[y][x] == "f":
             return False
         if self._direction == "EAST":
@@ -326,10 +336,6 @@ class Character():
     @property
     def pos(self):
         return self._pos
-
-    @pos.setter
-    def pos(self, xy):
-        self._pos = xy
 
     @score.setter
     def score(self, points):
