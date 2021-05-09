@@ -44,14 +44,14 @@ class Camera:
             if stop() is True:
                 break
 
-        # removedPic = np.zeros((700,700,3))
-        # cam.release()
-        # successWrite1, successWrite2 = False, False
-        # while (successWrite1, successWrite2) == (False, False):
-        #     if not successWrite1:
-        #         successWrite1 = cv2.imwrite("bildSRC.jpg", removedPic)
-        #     if not successWrite2:
-        #         successWrite2 = cv2.imwrite("bild.jpg", removedPic)
+        removedPic = np.zeros((700,700,3))
+        cam.release()
+        successWrite1, successWrite2 = False, False
+        while (successWrite1, successWrite2) == (False, False):
+            if not successWrite1:
+                successWrite1 = cv2.imwrite("bildSRC.jpg", removedPic)
+            if not successWrite2:
+                successWrite2 = cv2.imwrite("bild.jpg", removedPic)
 
     def halt_setter(status):
         """

@@ -369,16 +369,17 @@ def debug(errorCode, pos=(0,0)):
         get_pic_flip()
         os.system("java -cp topcodes.jar topcodes.DebugWindow > fil")
         get_codes()
+    
+    else:
+        if errorCode.lower() == "noline":
+            message = "Start or Finish is missing"
+        elif errorCode.lower() == "nocondition":
+            message = "Condition is missing"
+        elif errorCode.lower() == "nostop":
+            message = "Stop for while/is/else is missing"
 
-    if errorCode.lower() == "noline":
-        message = "Start or Finish is missing"
-    elif errorCode.lower() == "nocondition":
-        message = "Condition is missing"
-    elif errorCode.lower() == "nostop":
-        message = "Stop for while/is/else is missing"
-
-    debug = DebugWindow()
-    debug.draw_error_pic(message, pos)
+        debugWin = DebugWindow()
+        debugWin.draw_error_pic(message, pos)
 
 class DebugWindow():
     """
@@ -418,7 +419,7 @@ class DebugWindow():
 
         if pos == (0,0):
             textRect.center = (self.pictureWidth//2, self.pictureHeight//2)
-        elif pos[1] > 1920//2:
+        elif pos[1] >= 1920//2:
             arrowPoint = (pos[0], pos[1]+30)
             arrow = (
                 arrowPoint,
@@ -431,7 +432,7 @@ class DebugWindow():
                 )
             pygame.draw.polygon(self.window, (255, 0 , 0), arrow)
             textRect.center = (pos[0], pos[1]+30+90+10)
-        elif pos[1] < 1920//2:
+        else:
             arrowPoint = (pos[0], pos[1]-30)
             arrow = (
                 arrowPoint,

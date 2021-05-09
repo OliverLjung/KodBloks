@@ -23,13 +23,13 @@ Spelet är än så länge ett proof of concept till idéen påtaglig programmeri
 ### Krav
 För att köra spelet krävs:
 1. Windows
-2. Web kamera
+2. Webbkamera
 3. [Python](https://www.python.org/downloads/)
 4. De nödvändiga biblioteken installeras med dubbelklick på filen "install_pylibs"
 5. [Java](https://jdk.java.net/16/)
 6. Lägg till "openjdk-16.0.1_windows-x64_bin\jdk-16.0.1\bin" eller annan path till JDK till paths i miljö variabler
 
-Spelet bygger på TopCodes biblioteket skrivet av Micheal Horn
+Spelet bygger på TopCodes biblioteket skrivet av Michael Horn
 * [TopCodes](http://users.eecs.northwestern.edu/~mhorn/topcodes/)
 * [GitHub](https://github.com/TIDAL-Lab/TopCodes)
 
@@ -57,6 +57,8 @@ Spelet går ut på att ta karaktären, en slime genom en labyrint med hjälp av 
 # English
 KodBloks is one of the products of a project between BTH's students and Okatima/Kreativum with the goal to attract older target groups to Kreativum. During our stay at Kreativum we thought that it is a good idea to combine beginner programming, problem solving and Kreativum’s tactile format; to feel and see the installation to create a new, more technology-oriented installation: A game that is controlled using blocks of programming logic.
 
+We believe that the game would suit Kreativum because programming today, for elementary school and secondary school, is a distant and unknown concept. We think that taking programming’s most basic concepts and controlling them outside the computer and syntax to solve a simple task gives visitors a fun and educational introduction to where we experience elementary school and secondary school lacks.
+
 The game is a proof of concept to the idea of tangible programming. We found our technical solution through TopCodes and ideas through Tern that uses TopCodes but also Google Project Bloks, Scratch and more. 	
 
 ## Game
@@ -69,7 +71,7 @@ The following is needed to run the game:
 5. [Java](https://jdk.java.net/16/)
 6. Add "openjdk-16.0.1_windows-x64_bin\jdk-16.0.1\bin" or other path to JDK to paths in enviroment variables
 
-The game is built on the TopCodes libary written by Micheal Horn
+The game is built on the TopCodes libary written by Michael Horn
 * [TopCodes](http://users.eecs.northwestern.edu/~mhorn/topcodes/)
 * [GitHub](https://github.com/TIDAL-Lab/TopCodes)
 
@@ -91,5 +93,6 @@ The game is about taking the game character, a slime through a maze using simple
 * [Twilio Quest](https://www.twilio.com/quest)
 * [CodeCombat](https://codecombat.com/play/dungeon)
 * [AlgoBlocks](https://www.researchgate.net/publication/242383829_Algoblock_a_tangible_programming_language_a_tool_for_collaborative_learning)
+
 
 

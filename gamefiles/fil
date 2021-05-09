@@ -1,15 +1,13 @@
 bild.jpg
-Found 10 codes.
-24603 candidates.
-1308 tested.
-topcode=109, pos=(1267,377)
-topcode=121, pos=(1405,386)
-topcode=681, pos=(511,414)
-topcode=55, pos=(664,417)
-topcode=61, pos=(811,435)
-topcode=55, pos=(969,436)
-topcode=87, pos=(1117,452)
-topcode=47, pos=(1272,461)
-topcode=47, pos=(1410,472)
-topcode=93, pos=(1537,481)
-257ms elapsed time.
+Found 8 codes.
+23241 candidates.
+1136 tested.
+topcode=87, pos=(1062,662)
+topcode=61, pos=(900,666)
+topcode=87, pos=(738,668)
+topcode=79, pos=(1224,671)
+topcode=681, pos=(1519,673)
+topcode=93, pos=(451,680)
+topcode=55, pos=(1370,681)
+topcode=47, pos=(584,681)
+345ms elapsed time.
